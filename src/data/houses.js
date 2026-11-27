@@ -6,19 +6,21 @@ import { roomPhotos } from "./rooms";
 export const AREAS = {
   gudu: { id: "gudu", name: "Gudu", note: "Comfortable, affordable rooms within walking distance of the centre" },
   apo: { id: "apo", name: "Apo road", note: "A luxury house close to Cedar Crest Hospital, a short drive away" },
-  guzape: { id: "guzape", name: "Guzape", note: "Our luxury houses on the quiet Guzape hillside" },
+  guzape: { id: "guzape", name: "Guzape", note: "Our luxury houses on the quiet Guzape hillside, with a cook who makes food to order" },
 };
 
 export const AMENITIES = {
   power: "24-hour power",
   wifi: "Fast Wi-Fi",
   water: "Treated water",
-  cleaning: "Daily cleaning",
+  cleaning: "Housekeeping, daily cleaning",
+  manager: "Manager on site",
+  restaurant: "A cook who makes food to order",
   security: "Gated, 24-hour security",
-  reception: "Own reception desk",
+  reception: "Reception, open 24 hours",
   shuttle: "Shuttle to the centre",
   parking: "Parking",
-  kitchen: "Shared kitchen",
+  kitchen: "Guest kitchen to cook your own meals",
   garden: "Garden and seating",
 };
 
@@ -65,12 +67,13 @@ export const houses = [
     number: 1,
     name: "Guest House 1",
     area: "gudu",
-    address: "Gudu, Abuja",
+    address: "Gudu, Abuja. Reception is in Apartment 3",
     travel: { mode: "walk", minutes: 4 },
     tagline: "Our first guest house: ten rooms in two flats, a single on each ground floor and executive and VIP rooms upstairs.",
     cover: "/photos/house-courtyard.webp",
     gallery: ["/photos/house-courtyard.webp", "/photos/room-window.webp", "/photos/bath-shower.webp", "/photos/kitchen-table.webp"],
-    amenities: ["power", "wifi", "water", "cleaning", "security", "reception"],
+    kitchenNote: "One shared kitchen, beside the reception in Apartment 3",
+    amenities: ["power", "wifi", "water", "cleaning", "security", "reception", "manager", "kitchen"],
     rooms: build([...gh1Flat("Apartment 3", 1), ...gh1Flat("Apartment 4", 6)], { numbered: true }),
   },
   {
@@ -83,7 +86,8 @@ export const houses = [
     tagline: "Our biggest house: four flats with singles, deluxe, executive and VIP rooms, plus a large VVIP apartment with two beds and its own kitchen.",
     cover: "/photos/house-balcony.webp",
     gallery: ["/photos/house-balcony.webp", "/photos/room-white.webp", "/photos/room-large.webp", "/photos/lounge.webp"],
-    amenities: ["power", "wifi", "water", "cleaning", "security", "reception", "parking"],
+    kitchenNote: "A kitchen in every flat",
+    amenities: ["power", "wifi", "water", "cleaning", "security", "reception", "parking", "manager", "kitchen"],
     rooms: build(
       [
         ...gh2Flat("Flat 1", gh2Singles("Flat 1")),
@@ -105,7 +109,8 @@ export const houses = [
     cover: "/photos/house-arch.webp",
     gallery: ["/photos/house-arch.webp", "/photos/room-pillows.webp", "/photos/bath-tub.webp", "/photos/lounge-sun.webp"],
     sampleRates: true,
-    amenities: ["power", "wifi", "water", "cleaning", "security", "reception"],
+    kitchenNote: "One shared kitchen downstairs",
+    amenities: ["power", "wifi", "water", "cleaning", "security", "reception", "manager", "kitchen"],
     rooms: build(
       [
         room("Main building", "Ground floor", "standard", 16000, "Single 1"),
@@ -129,7 +134,8 @@ export const houses = [
     cover: "/photos/hero-garden.webp",
     gallery: ["/photos/hero-garden.webp", "/photos/room-large.webp", "/photos/bath-shower.webp", "/photos/lounge.webp"],
     sampleRates: true,
-    amenities: ["power", "wifi", "water", "cleaning", "security", "reception", "shuttle", "parking"],
+    kitchenNote: "A guest kitchen in the house",
+    amenities: ["power", "wifi", "water", "cleaning", "security", "reception", "shuttle", "parking", "manager", "kitchen"],
     rooms: build(numbered("Main building", [["executive", 35000], ["executive", 35000], ["executive", 35000], ["luxury", 45000], ["luxury", 45000]]), { numbered: true }),
   },
   {
@@ -143,7 +149,8 @@ export const houses = [
     cover: "/photos/lounge-sun.webp",
     gallery: ["/photos/lounge-sun.webp", "/photos/room-twin-warm.webp", "/photos/bath-tub.webp", "/photos/kitchen.webp"],
     sampleRates: true,
-    amenities: ["power", "wifi", "water", "cleaning", "security", "reception", "shuttle", "parking", "garden"],
+    kitchenNote: "A kitchen in every flat",
+    amenities: ["power", "wifi", "water", "cleaning", "security", "reception", "shuttle", "parking", "garden", "manager", "restaurant", "kitchen"],
     rooms: build(numbered("Main building", [["executive", 30000], ["executive", 30000], ["luxury", 40000], ["luxury", 40000]]), { numbered: true }),
   },
   {
@@ -157,7 +164,8 @@ export const houses = [
     cover: "/photos/room-twin.webp",
     gallery: ["/photos/room-twin.webp", "/photos/lounge.webp", "/photos/kitchen-table.webp", "/photos/bath-shower.webp"],
     sampleRates: true,
-    amenities: ["power", "wifi", "water", "cleaning", "security", "reception", "shuttle", "parking", "kitchen"],
+    kitchenNote: "A kitchen in every flat",
+    amenities: ["power", "wifi", "water", "cleaning", "security", "reception", "shuttle", "parking", "kitchen", "manager", "restaurant"],
     rooms: build(numbered("Main building", [["executive", 35000], ["executive", 35000], ["executive", 35000], ["luxury", 45000], ["luxury", 45000], ["luxury", 45000]]), { numbered: true }),
   },
   {
@@ -170,7 +178,8 @@ export const houses = [
     tagline: "Our most luxurious house: seven named rooms and suites in Guzape, finished to the highest standard.",
     cover: "/photos/lounge.webp",
     gallery: ["/photos/lounge.webp", "/photos/room-twin-warm.webp", "/photos/room-large.webp", "/photos/bath-tub.webp"],
-    amenities: ["power", "wifi", "water", "cleaning", "security", "reception", "shuttle", "parking", "garden"],
+    kitchenNote: "A kitchen in every flat",
+    amenities: ["power", "wifi", "water", "cleaning", "security", "reception", "shuttle", "parking", "garden", "manager", "restaurant", "kitchen"],
     rooms: build([["executive", 45000, "Emerald"], ["executive", 45000, "Sapphire"], ["executive", 45000, "Gold"], ["executive", 45000, "Diamond"], ["luxury", 55000, "Platinum"], ["luxury", 55000, "Royalty"], ["luxury", 55000, "Crown"]].map(([c, r, n]) => room("Main building", null, c, r, n)), { numbered: false }),
   },
 ];

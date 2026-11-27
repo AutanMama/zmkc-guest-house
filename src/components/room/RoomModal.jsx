@@ -57,9 +57,9 @@ export default function RoomModal({ room, search, onClose }) {
 
           <div className="mt-6 rounded-2xl bg-page p-5">
             <p className="text-sm text-muted">
-              {formatLong(search.checkIn)} → {formatLong(search.checkOut)}
+              {formatLong(search.checkIn)} → {formatLong(search.checkOut)} · check-out by 12 noon
             </p>
-            {room.free ? (
+            {room.available ? (
               <>
                 <div className="mt-3">
                   <QuoteLines quote={q} />

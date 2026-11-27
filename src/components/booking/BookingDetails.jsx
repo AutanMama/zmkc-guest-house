@@ -11,8 +11,8 @@ export default function BookingDetails({ booking }) {
   const rows = [
     ["Guest house", house.name],
     ["Room", `${roomLabel(unitById[booking.unit])} · ${CATEGORIES[booking.category]?.name}`],
-    ["Check-in", `${formatLong(booking.checkIn)}, from 12:00`],
-    ["Check-out", `${formatLong(booking.checkOut)}, by 11:00`],
+    ["Check-in", `${formatLong(booking.checkIn)}, any time`],
+    ["Check-out", `${formatLong(booking.checkOut)}, by 12 noon`],
     ["Guests", booking.guests],
     ["Visit", STAY_REASONS.find((r) => r.id === booking.reason)?.label],
     ["Booked by", `${booking.guest.name} · ${booking.guest.phone}`],

@@ -9,7 +9,7 @@ import TravelBadge from "../components/ui/TravelBadge";
 import { STAY_REASONS } from "../data/content";
 import { houseById, unitById } from "../data/houses";
 import { CATEGORIES } from "../data/rooms";
-import { isUnitFree } from "../lib/availability";
+import { isUnitAvailable } from "../lib/availability";
 import { bookingStore } from "../lib/bookings";
 import { formatLong, todayKey } from "../lib/dates";
 import { quote } from "../lib/pricing";
@@ -50,7 +50,7 @@ export default function Checkout() {
 
   function confirm(e) {
     e.preventDefault();
-    if (!isUnitFree(room.id, search.checkIn, search.checkOut, bookings)) {
+    if (!isUnitAvailable(room.id, search.checkIn, search.checkOut, bookings)) {
       setError(`${room.name} has just been booked for these dates. Please go back and choose another room.`);
       return;
     }
@@ -124,14 +124,14 @@ export default function Checkout() {
               <div className="mt-1"><TravelBadge travel={house.travel} /></div>
               <p className="mt-4 text-[15px] text-ink">
                 {formatLong(search.checkIn)} → {formatLong(search.checkOut)}
-                <span className="block text-muted">{search.guests} {search.guests === 1 ? "guest" : "guests"} · check-in from 12:00</span>
+                <span className="block text-muted">{search.guests} {search.guests === 1 ? "guest" : "guests"} · check-in any time · check-out by 12 noon</span>
               </p>
               <div className="mt-5"><QuoteLines quote={q} /></div>
               {error && <p role="alert" className="mt-4 rounded-lg bg-stop-soft p-3 text-sm text-stop">{error}</p>}
               <button type="submit" className="mt-6 h-12 w-full rounded-lg bg-brand text-[15px] font-semibold text-white transition-colors hover:bg-brand-hover">
                 {payment === "card" ? "Confirm and pay" : "Confirm booking"}
               </button>
-              <p className="mt-3 flex items-center justify-center gap-1.5 text-sm text-muted"><Lock size={14} aria-hidden /> Free cancellation up to 48 hours before</p>
+              <p className="mt-3 flex items-center justify-center gap-1.5 text-sm text-muted"><Lock size={14} aria-hidden /> Cancel at no charge up to 48 hours before</p>
             </div>
           </div>
         </aside>

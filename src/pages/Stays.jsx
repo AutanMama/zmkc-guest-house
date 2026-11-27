@@ -32,7 +32,7 @@ export default function Stays() {
   const [maxRate, setMaxRate] = useState(0);
   const results = useMemo(() => searchHouses({ ...search, filters: { area, maxRate } }, bookings), [search, area, maxRate, bookings]);
   const query = searchQuery(search);
-  const freeTotal = results.reduce((n, r) => n + r.free.length, 0);
+  const availableTotal = results.reduce((n, r) => n + r.available.length, 0);
 
   return (
     <main className="mx-auto max-w-6xl px-5 py-10 md:px-8 md:py-14">
@@ -46,7 +46,7 @@ export default function Stays() {
         {BUDGETS.map((b) => <Chip key={b.id} active={maxRate === b.id} onClick={() => setMaxRate(b.id)}>{b.label}</Chip>)}
       </div>
       <p className="mt-4 text-[15px] text-muted">
-        <span className="font-semibold text-ink">{freeTotal} rooms free</span> from {formatShort(search.checkIn)} to {formatShort(search.checkOut)}
+        <span className="font-semibold text-ink">{availableTotal} rooms available</span> from {formatShort(search.checkIn)} to {formatShort(search.checkOut)}
       </p>
 
       {Object.values(AREAS)
@@ -58,7 +58,7 @@ export default function Stays() {
               <p className="text-muted">{a.note}</p>
             </div>
             <ul className="mt-5 space-y-5">
-              {results.filter((r) => r.house.area === a.id).map(({ house, total, free, from }) => {
+              {results.filter((r) => r.house.area === a.id).map(({ house, total, available: free, from }) => {
                 const full = free.length === 0;
                 const q = !full && quote({ rate: from, nights: search.nights });
                 return (
@@ -69,7 +69,7 @@ export default function Stays() {
                       <div className="mt-2"><TravelBadge travel={house.travel} /></div>
                       <p className="mt-3 leading-relaxed text-muted">{house.tagline}</p>
                       <div className="mt-4">
-                        <div className="flex justify-between text-sm"><span className="font-semibold text-ink">{free.length} of {total} rooms free</span><span className="text-muted">{total - free.length} occupied</span></div>
+                        <div className="flex justify-between text-sm"><span className="font-semibold text-ink">{free.length} of {total} rooms available</span><span className="text-muted">{total - free.length} occupied</span></div>
                         <div className="mt-1.5 flex h-2 overflow-hidden rounded-full bg-mist" aria-hidden>
                           <span className="bg-brand" style={{ width: `${(free.length / total) * 100}%` }} />
                         </div>
@@ -77,7 +77,7 @@ export default function Stays() {
                     </div>
                     <div className="flex flex-col justify-between gap-4 border-t border-line pt-4 md:border-t-0 md:border-l md:pt-0 md:pl-5">
                       {full ? (
-                        <p className="font-semibold text-stop">No free rooms for these dates{maxRate ? " in your budget" : ""}</p>
+                        <p className="font-semibold text-stop">No rooms available for these dates{maxRate ? " in your budget" : ""}</p>
                       ) : (
                         <div>
                           <p className="text-sm text-muted">From {naira(from)} a night</p>

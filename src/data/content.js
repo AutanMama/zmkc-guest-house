@@ -9,7 +9,7 @@ export const STAY_REASONS = [
   {
     id: "transplant",
     label: "Transplant work-up",
-    note: "Tests, surgery and recovery can take six weeks or more. A studio or step-free suite helps.",
+    note: "Tests, surgery and recovery can take six weeks or more. A VIP room or the VVIP apartment gives you space.",
     suggest: "4 to 8 weeks",
   },
   {
@@ -48,7 +48,7 @@ export const FAQS = [
   },
   {
     q: "Can I choose a specific room?",
-    a: "Yes. Each house shows every room with its number, price and whether it's free for your dates, so you can pick the exact room you want.",
+    a: "Yes. Each house shows every room with its number, price and whether it's available for your dates, so you can pick the exact room you want.",
   },
   {
     q: "Do you offer discounts for long stays?",
@@ -59,9 +59,23 @@ export const FAQS = [
     a: "Yes. Every room takes two guests and you can add an extra carer bed. For a whole family, Guest House 2 has a large VVIP apartment with two beds and its own kitchen.",
   },
   {
+    q: "What time is check-out?",
+    a: "12 noon. Your night runs until 12 noon the next day, whatever time you checked in, even late at night. We allow an extra hour until 1pm; after that a late check-out charge applies unless you renew.",
+  },
+  {
+    q: "Can I cook, or order food?",
+    a: "Every guest house has a kitchen where you can cook your own meals; reception will show you around. In our Guzape houses there's also a cook: tell them what you'd like and they'll make it for you.",
+  },
+  {
     q: "How do I pay?",
     a: "By card or bank transfer when you book, or at the reception of your guest house on arrival. Your room is held for 24 hours if you choose to pay on arrival.",
   },
+];
+
+export const STAY_RULES = [
+  { title: "Check in any time", body: "Day or night, reception is open. Your night runs until 12 noon the next day, whatever time you arrive." },
+  { title: "Check out by 12 noon", body: "We allow one extra hour, until 1pm. After that, a late check-out charge applies, or you can renew for another night." },
+  { title: "Look after the house", body: "Anything broken or damaged in your room, bathroom or the kitchen is charged at cost." },
 ];
 
 export const CONTACT = {

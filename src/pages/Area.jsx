@@ -23,7 +23,7 @@ export default function Area() {
   const bookings = useBookings();
   const [house, setHouse] = useState("all");
   const [sort, setSort] = useState("price");
-  const [onlyFree, setOnlyFree] = useState(true);
+  const [onlyAvailable, setOnlyAvailable] = useState(true);
   const [open, setOpen] = useState(null);
   const areaHouses = houses.filter((h) => h.area === areaId);
   const rooms = useMemo(
@@ -32,8 +32,8 @@ export default function Area() {
   );
   if (!area) return <NotFound />;
 
-  const shown = sortRooms(rooms.filter((r) => (house === "all" || r.house === house) && (!onlyFree || r.free)), sort);
-  const free = rooms.filter((r) => r.free);
+  const shown = sortRooms(rooms.filter((r) => (house === "all" || r.house === house) && (!onlyAvailable || r.available)), sort);
+  const free = rooms.filter((r) => r.available);
   const query = searchQuery(search);
 
   return (
@@ -52,7 +52,7 @@ export default function Area() {
           <h1 className="mt-6 font-display text-6xl leading-none font-semibold tracking-tight text-white md:text-8xl">{area.name}</h1>
           <p className="mt-4 max-w-xl text-lg text-white/90">
             {area.note}. {areaHouses.length} {areaHouses.length === 1 ? "house" : "houses"}, {rooms.length} rooms,{" "}
-            <span className="font-bold text-lime">{free.length} free</span> for your dates.
+            <span className="font-bold text-lime">{free.length} available</span> for your dates.
           </p>
           <div className="mt-8"><SearchBar key={query} initial={search} onSearch={setSearch} onDark /></div>
         </div>
@@ -62,14 +62,14 @@ export default function Area() {
         <div className="grid gap-4 md:grid-cols-3">
           {areaHouses.map((h) => {
             const hr = rooms.filter((r) => r.house === h.id);
-            const hf = hr.filter((r) => r.free);
+            const hf = hr.filter((r) => r.available);
             return (
               <button key={h.id} type="button" onClick={() => setHouse(house === h.id ? "all" : h.id)} aria-pressed={house === h.id} className={`flex items-center gap-4 rounded-2xl p-3 text-left transition-colors ${house === h.id ? "bg-brand text-white" : "bg-paper shadow-card hover:bg-brand-soft"}`}>
                 <img src={h.cover} alt="" className="h-20 w-24 shrink-0 rounded-xl object-cover" />
                 <span className="min-w-0">
                   <span className="block font-display text-xl font-semibold">{h.name}</span>
                   <span className={`block text-sm ${house === h.id ? "text-on-deep" : "text-muted"}`}>
-                    {hf.length} of {hr.length} free · from {naira(Math.min(...hr.map((r) => r.rate)))}
+                    {hf.length} of {hr.length} available · from {naira(Math.min(...hr.map((r) => r.rate)))}
                   </span>
                   <span className={`text-sm font-semibold ${house === h.id ? "text-lime" : ""}`}>{house === h.id ? "Showing only this house" : <TravelBadge travel={h.travel} />}</span>
                 </span>
@@ -79,7 +79,7 @@ export default function Area() {
         </div>
 
         <div className="mt-8 flex flex-wrap items-center gap-2">
-          <Chip active={onlyFree} onClick={() => setOnlyFree((v) => !v)}>Free only</Chip>
+          <Chip active={onlyAvailable} onClick={() => setOnlyAvailable((v) => !v)}>Available only</Chip>
           <span className="mx-1 h-6 w-px bg-line" aria-hidden />
           {SORTS.map((s) => <Chip key={s.id} active={sort === s.id} onClick={() => setSort(s.id)}>{s.label}</Chip>)}
           <p className="ml-auto text-[15px] text-muted">{shown.length} rooms</p>
@@ -88,7 +88,7 @@ export default function Area() {
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {shown.map((r) => <RoomCard key={r.id} room={r} nights={search.nights} onOpen={setOpen} showHouse />)}
         </div>
-        {shown.length === 0 && <p className="mt-10 rounded-2xl border border-dashed border-line p-10 text-center text-muted">Every room here is taken for these dates. Try other dates, or turn off "Free only" to see them.</p>}
+        {shown.length === 0 && <p className="mt-10 rounded-2xl border border-dashed border-line p-10 text-center text-muted">Every room here is taken for these dates. Try other dates, or turn off "Available only" to see them.</p>}
       </section>
 
       {open && <RoomModal room={open} search={search} onClose={() => setOpen(null)} />}

@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, Check, MapPin } from "lucide-react";
 import Gallery from "../components/house/Gallery";
 import RoomCard from "../components/room/RoomCard";
+import StayRules from "../components/house/StayRules";
 import RoomModal from "../components/room/RoomModal";
 import { Chip } from "../components/room/RoomFilters";
 import TravelBadge from "../components/ui/TravelBadge";
@@ -21,15 +22,15 @@ export default function House() {
   const bookings = useBookings();
   const rooms = useMemo(() => (house ? roomStatus(id, search.checkIn, search.checkOut, bookings) : []), [house, id, search.checkIn, search.checkOut, bookings]);
   const [open, setOpen] = useState(null);
-  const [onlyFree, setOnlyFree] = useState(false);
+  const [onlyAvailable, setOnlyAvailable] = useState(false);
   const [category, setCategory] = useState("all");
 
   if (!house) return <NotFound />;
   const query = searchQuery(search);
   const categories = [...new Set(house.rooms.map((r) => r.category))];
-  const shown = rooms.filter((r) => (!onlyFree || r.free) && (category === "all" || r.category === category));
+  const shown = rooms.filter((r) => (!onlyAvailable || r.available) && (category === "all" || r.category === category));
   const blocks = [...new Set(shown.map((r) => r.block))];
-  const free = rooms.filter((r) => r.free).length;
+  const free = rooms.filter((r) => r.available).length;
 
   return (
     <main className="mx-auto max-w-6xl px-5 py-8 md:px-8 md:py-12">
@@ -47,7 +48,7 @@ export default function House() {
         </div>
         <p className="rounded-2xl bg-paper px-5 py-3 text-right shadow-card">
           <span className="block font-display text-3xl font-semibold text-brand">{free}/{rooms.length}</span>
-          <span className="text-sm text-muted">rooms free for your dates</span>
+          <span className="text-sm text-muted">rooms available for your dates</span>
         </p>
       </div>
       <div className="mt-8">
@@ -62,13 +63,17 @@ export default function House() {
         </ul>
       </div>
 
+      <div className="mt-10">
+        <StayRules house={house} />
+      </div>
+
       <section className="mt-16" aria-labelledby="rooms">
         <h2 id="rooms" className="font-display text-4xl font-semibold text-ink">Choose your room</h2>
         <div className="mt-5"><SearchBar key={query} initial={search} onSearch={setSearch} /></div>
         <div className="mt-6 flex flex-wrap gap-2">
           <Chip active={category === "all"} onClick={() => setCategory("all")}>All rooms</Chip>
           {categories.map((c) => <Chip key={c} active={category === c} onClick={() => setCategory(c)}>{CATEGORIES[c].name}</Chip>)}
-          <Chip active={onlyFree} onClick={() => setOnlyFree((v) => !v)}>Free only</Chip>
+          <Chip active={onlyAvailable} onClick={() => setOnlyAvailable((v) => !v)}>Available only</Chip>
         </div>
         {blocks.map((b) => (
           <div key={b} className="mt-10">

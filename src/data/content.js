@@ -36,21 +36,6 @@ export const STAY_REASONS = [
   },
 ];
 
-export const PROMISES = [
-  {
-    title: "Minutes from your care",
-    body: "Our Gudu houses are an affordable short walk from the centre. Our luxury houses on the Apo road and in Guzape are a short drive, with a shuttle to appointments.",
-  },
-  {
-    title: "A reception in every house",
-    body: "Each house has its own front desk, so someone who knows your name is there day and night.",
-  },
-  {
-    title: "Built for long stays",
-    body: "Stay past a month and every night after is 10% off. And you'll never sleep without light: if the grid goes off at night, the generator runs until morning.",
-  },
-];
-
 export const FAQS = [
   {
     q: "Can I stay if I'm not a patient?",

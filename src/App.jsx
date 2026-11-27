@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import SiteHeader from "./components/layout/SiteHeader";
 import SiteFooter from "./components/layout/SiteFooter";
+import WhatsAppButton from "./components/layout/WhatsAppButton";
 import Home from "./pages/Home";
 import Stays from "./pages/Stays";
 import House from "./pages/House";
@@ -38,6 +39,7 @@ export default function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
       <SiteFooter />
+      <WhatsAppButton />
     </>
   );
 }

@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { AREAS, houses, units } from "../../data/houses";
 import { naira } from "../../lib/money";
@@ -33,9 +34,10 @@ export default function AreaExplorer() {
                 role="tab"
                 aria-selected={active === id}
                 onClick={() => setActive(id)}
-                className={`rounded-full px-5 py-2.5 text-[15px] font-bold transition-colors ${active === id ? "bg-brand text-white shadow" : "text-ink hover:text-brand"}`}
+                className={`relative rounded-full px-5 py-2.5 text-[15px] font-bold transition-colors ${active === id ? "text-white" : "text-ink hover:text-brand"}`}
               >
-                {AREAS[id].name}
+                {active === id && <motion.span layoutId="area-pill" className="absolute inset-0 rounded-full bg-brand shadow" transition={{ type: "spring", stiffness: 420, damping: 34 }} aria-hidden />}
+                <span className="relative">{AREAS[id].name}</span>
               </button>
             ))}
           </div>
@@ -47,7 +49,11 @@ export default function AreaExplorer() {
             {naira(Math.min(...rooms.map((r) => r.rate)))} a night.
           </p>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {areaHouses.map((h) => <HouseCard key={h.id} house={h} />)}
+            {areaHouses.map((h, i) => (
+              <motion.div key={h.id} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}>
+                <HouseCard house={h} />
+              </motion.div>
+            ))}
           </div>
 
           <h3 className="mt-14 font-display text-2xl font-semibold text-ink">A look inside the rooms</h3>

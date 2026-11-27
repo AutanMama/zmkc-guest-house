@@ -4,9 +4,9 @@ import { roomPhotos } from "./rooms";
 // owner's description; exact street addresses and some rates are still to be
 // confirmed and are marked as sample.
 export const AREAS = {
-  gudu: { id: "gudu", name: "Gudu", note: "Walking distance to the centre" },
-  apo: { id: "apo", name: "Apo road", note: "A short drive, just past Cedar Crest Hospital" },
-  guzape: { id: "guzape", name: "Guzape", note: "Quiet hillside houses with our largest rooms" },
+  gudu: { id: "gudu", name: "Gudu", note: "Comfortable, affordable rooms within walking distance of the centre" },
+  apo: { id: "apo", name: "Apo road", note: "A luxury house close to Cedar Crest Hospital, a short drive away" },
+  guzape: { id: "guzape", name: "Guzape", note: "Our luxury houses on the quiet Guzape hillside" },
 };
 
 export const AMENITIES = {
@@ -36,24 +36,26 @@ const room = (block, floor, category, rate, name) => ({ block, floor, category, 
 
 // Guest House 1: two flats of five rooms. The single room is on the ground floor.
 const gh1Flat = (block, first) => [
-  room(block, "Ground floor", "standard", 12000),
-  room(block, "Upstairs", "executive", 15000),
-  room(block, "Upstairs", "luxury", 18000),
-  room(block, "Upstairs", "executive", 15000),
-  room(block, "Upstairs", "luxury", 18000),
+  room(block, "Ground floor", "standard", 15000),
+  room(block, "Upstairs", "executive", 18000),
+  room(block, "Upstairs", "luxury", 20000),
+  room(block, "Upstairs", "executive", 18000),
+  room(block, "Upstairs", "luxury", 20000),
 ].map((r, i) => ({ ...r, name: `Room ${first + i}` }));
 
-// Guest House 2: four flats. Singles on the ground floor (Flat 2 has one, the
-// reception takes the other space), then Deluxe 1, Deluxe 2 and Executive 1,
-// then Deluxe 3 and VIP 1 on the top floor. Names repeat in each flat.
-const gh2Flat = (block, singles) => [
-  ...Array.from({ length: singles }, (_, i) => room(block, "Ground floor", "standard", 15000, `Single ${i + 1}`)),
-  room(block, "First floor", "deluxe", 24000, "Deluxe 1"),
-  room(block, "First floor", "deluxe", 24000, "Deluxe 2"),
-  room(block, "First floor", "executive", 30000, "Executive 1"),
-  room(block, "Second floor", "deluxe", 24000, "Deluxe 3"),
-  room(block, "Second floor", "luxury", 35000, "VIP 1"),
+// Guest House 2: four flats. Two singles on the ground floor, except Flat 2,
+// where the ground floor holds the reception and the VVIP two-bedroom apartment.
+// Then Deluxe 1, Deluxe 2 and Executive 1, then Deluxe 3 and VIP 1 on top.
+// Names repeat in each flat.
+const gh2Flat = (block, ground) => [
+  ...ground,
+  room(block, "First floor", "deluxe", 18000, "Deluxe 1"),
+  room(block, "First floor", "deluxe", 18000, "Deluxe 2"),
+  room(block, "First floor", "executive", 22000, "Executive 1"),
+  room(block, "Second floor", "deluxe", 18000, "Deluxe 3"),
+  room(block, "Second floor", "luxury", 25000, "VIP 1"),
 ];
+const gh2Singles = (block) => [room(block, "Ground floor", "standard", 16000, "Single 1"), room(block, "Ground floor", "standard", 16000, "Single 2")];
 
 const numbered = (block, cats) => cats.map(([category, rate]) => room(block, null, category, rate));
 
@@ -78,11 +80,19 @@ export const houses = [
     area: "gudu",
     address: "Gudu, Abuja",
     travel: { mode: "walk", minutes: 5 },
-    tagline: "Our biggest house: four flats with singles on the ground floor, deluxe and executive rooms above, and a VIP room at the top.",
+    tagline: "Our biggest house: four flats with singles, deluxe, executive and VIP rooms, plus a two-bedroom VVIP apartment with its own kitchen.",
     cover: "/photos/house-balcony.webp",
     gallery: ["/photos/house-balcony.webp", "/photos/room-white.webp", "/photos/room-large.webp", "/photos/lounge.webp"],
     amenities: ["power", "wifi", "water", "cleaning", "security", "reception", "parking"],
-    rooms: build([...gh2Flat("Flat 1", 2), ...gh2Flat("Flat 2", 1), ...gh2Flat("Flat 3", 2), ...gh2Flat("Flat 4", 2)], { numbered: false }),
+    rooms: build(
+      [
+        ...gh2Flat("Flat 1", gh2Singles("Flat 1")),
+        ...gh2Flat("Flat 2", [room("Flat 2", "Ground floor", "vvip", 35000, "VVIP")]),
+        ...gh2Flat("Flat 3", gh2Singles("Flat 3")),
+        ...gh2Flat("Flat 4", gh2Singles("Flat 4")),
+      ],
+      { numbered: false }
+    ),
   },
   {
     id: "gh3",
@@ -91,25 +101,36 @@ export const houses = [
     area: "gudu",
     address: "On the main road towards the centre, Gudu",
     travel: { mode: "walk", minutes: 6 },
-    tagline: "Six rooms on the main road, easy to find for first-time visitors and taxis.",
+    tagline: "Six rooms on the main road towards the centre: two singles downstairs, executive and VIP rooms upstairs.",
     cover: "/photos/house-arch.webp",
     gallery: ["/photos/house-arch.webp", "/photos/room-pillows.webp", "/photos/bath-tub.webp", "/photos/lounge-sun.webp"],
-    amenities: ["power", "wifi", "water", "cleaning", "security", "reception"],
     sampleRates: true,
-    rooms: build(numbered("Main building", [["deluxe", 20000], ["deluxe", 20000], ["deluxe", 20000], ["deluxe", 20000], ["executive", 25000], ["executive", 25000]]), { numbered: true }),
+    amenities: ["power", "wifi", "water", "cleaning", "security", "reception"],
+    rooms: build(
+      [
+        room("Main building", "Ground floor", "standard", 16000, "Single 1"),
+        room("Main building", "Ground floor", "standard", 16000, "Single 2"),
+        room("Main building", "Upstairs", "executive", 20000, "Executive 1"),
+        room("Main building", "Upstairs", "executive", 20000, "Executive 2"),
+        room("Main building", "Upstairs", "luxury", 25000, "VIP 1"),
+        room("Main building", "Upstairs", "luxury", 25000, "VIP 2"),
+      ],
+      { numbered: false }
+    ),
   },
   {
     id: "gh4",
     number: 4,
     name: "Guest House 4",
     area: "apo",
-    address: "Apo road, after Cedar Crest Hospital",
+    address: "Towards Apo, close to Cedar Crest Hospital",
     travel: { mode: "drive", minutes: 8 },
-    tagline: "Five larger rooms on the Apo road, a short drive from the centre.",
+    tagline: "A luxury house towards Apo, close to Cedar Crest Hospital: five large executive rooms and VIP suites.",
     cover: "/photos/hero-garden.webp",
     gallery: ["/photos/hero-garden.webp", "/photos/room-large.webp", "/photos/bath-shower.webp", "/photos/lounge.webp"],
+    sampleRates: true,
     amenities: ["power", "wifi", "water", "cleaning", "security", "reception", "shuttle", "parking"],
-    rooms: build(numbered("Main building", [["executive", 30000], ["executive", 30000], ["executive", 30000], ["luxury", 40000], ["luxury", 40000]]), { numbered: true }),
+    rooms: build(numbered("Main building", [["executive", 35000], ["executive", 35000], ["executive", 35000], ["luxury", 45000], ["luxury", 45000]]), { numbered: true }),
   },
   {
     id: "gh5",
@@ -121,9 +142,9 @@ export const houses = [
     tagline: "Four quiet rooms on the Guzape hillside, for guests who want rest above all.",
     cover: "/photos/lounge-sun.webp",
     gallery: ["/photos/lounge-sun.webp", "/photos/room-twin-warm.webp", "/photos/bath-tub.webp", "/photos/kitchen.webp"],
-    amenities: ["power", "wifi", "water", "cleaning", "security", "reception", "shuttle", "parking", "garden"],
     sampleRates: true,
-    rooms: build(numbered("Main building", [["executive", 35000], ["executive", 35000], ["luxury", 45000], ["luxury", 45000]]), { numbered: true }),
+    amenities: ["power", "wifi", "water", "cleaning", "security", "reception", "shuttle", "parking", "garden"],
+    rooms: build(numbered("Main building", [["executive", 30000], ["executive", 30000], ["luxury", 40000], ["luxury", 40000]]), { numbered: true }),
   },
   {
     id: "gh6",
@@ -135,8 +156,9 @@ export const houses = [
     tagline: "Six spacious rooms in Guzape, with a lounge and garden for families.",
     cover: "/photos/room-twin.webp",
     gallery: ["/photos/room-twin.webp", "/photos/lounge.webp", "/photos/kitchen-table.webp", "/photos/bath-shower.webp"],
+    sampleRates: true,
     amenities: ["power", "wifi", "water", "cleaning", "security", "reception", "shuttle", "parking", "kitchen"],
-    rooms: build(numbered("Main building", [["deluxe", 30000], ["deluxe", 30000], ["executive", 30000], ["luxury", 40000], ["luxury", 40000], ["luxury", 40000]]), { numbered: true }),
+    rooms: build(numbered("Main building", [["executive", 35000], ["executive", 35000], ["executive", 35000], ["luxury", 45000], ["luxury", 45000], ["luxury", 45000]]), { numbered: true }),
   },
   {
     id: "gh7",
@@ -145,11 +167,11 @@ export const houses = [
     area: "guzape",
     address: "Guzape, Abuja",
     travel: { mode: "drive", minutes: 15 },
-    tagline: "Our most luxurious house: seven named rooms and suites in Guzape, finished to a high standard.",
+    tagline: "Our most luxurious house: seven named rooms and suites in Guzape, finished to the highest standard.",
     cover: "/photos/lounge.webp",
     gallery: ["/photos/lounge.webp", "/photos/room-twin-warm.webp", "/photos/room-large.webp", "/photos/bath-tub.webp"],
     amenities: ["power", "wifi", "water", "cleaning", "security", "reception", "shuttle", "parking", "garden"],
-    rooms: build([["executive", 40000, "Emerald"], ["executive", 40000, "Sapphire"], ["executive", 40000, "Gold"], ["executive", 40000, "Diamond"], ["luxury", 50000, "Platinum"], ["luxury", 50000, "Royalty"], ["luxury", 50000, "Crown"]].map(([c, r, n]) => room("Main building", null, c, r, n)), { numbered: false }),
+    rooms: build([["executive", 45000, "Emerald"], ["executive", 45000, "Sapphire"], ["executive", 45000, "Gold"], ["executive", 45000, "Diamond"], ["luxury", 55000, "Platinum"], ["luxury", 55000, "Royalty"], ["luxury", 55000, "Crown"]].map(([c, r, n]) => room("Main building", null, c, r, n)), { numbered: false }),
   },
 ];
 

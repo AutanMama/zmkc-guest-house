@@ -41,6 +41,16 @@ export const CATEGORIES = {
     size: "38 m²",
     features: ["Air conditioning", "Bathroom with tub", "Separate lounge", "Two smart TVs", "Fridge", "Kettle and tea", "Bathrobes"],
   },
+  vvip: {
+    id: "vvip",
+    name: "VVIP apartment",
+    short: "VVIP",
+    image: "/photos/room-twin.webp",
+    summary: "A two-bedroom apartment with its own kitchen: room for the whole family on a long stay.",
+    bed: "2 bedrooms, 2 beds",
+    size: "55 m²",
+    features: ["Two bedrooms", "Own kitchen", "Bathroom", "Air conditioning", "Smart TV", "Fridge", "Dining table"],
+  },
 };
 
 // Photos by category; rooms take turns so neighbours don't look the same.
@@ -49,15 +59,16 @@ const PHOTOS = {
   deluxe: ["room-white", "r-painting", "r-fan", "r-garden", "r-chair", "r-modfurn", "r-mirror"],
   executive: ["room-large", "r-pendant", "r-kingseat", "r-woodking", "r-balcony", "r-luxwin"],
   luxury: ["r-redwall", "r-goldart", "r-woodhead", "r-seatdesk", "r-wood", "room-twin-warm"],
+  vvip: ["room-twin", "room-twin-warm"],
 };
 const BATHS = ["bath-shower", "bath-tub"];
-const EXTRAS = { standard: ["kitchen-table", "lounge-sun"], deluxe: ["lounge", "kitchen"], executive: ["lounge", "r-seatdesk"], luxury: ["r-wood", "lounge-sun"] };
+const EXTRAS = { standard: ["kitchen-table", "lounge-sun"], deluxe: ["lounge", "kitchen"], executive: ["lounge", "r-seatdesk"], luxury: ["r-wood", "lounge-sun"], vvip: ["kitchen", "kitchen-table"] };
 
 export function roomPhotos(category, i) {
   const list = PHOTOS[category];
   const main = list[i % list.length];
   const second = list[(i + 3) % list.length];
-  const bath = category === "luxury" ? "bath-tub" : BATHS[i % 2];
+  const bath = category === "luxury" || category === "vvip" ? "bath-tub" : BATHS[i % 2];
   const extra = EXTRAS[category][i % 2];
   return [main, second, bath, extra].map((p) => `/photos/${p}.webp`);
 }

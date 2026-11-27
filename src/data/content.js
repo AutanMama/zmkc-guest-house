@@ -29,7 +29,7 @@ export const STAY_REASONS = [
 export const PROMISES = [
   {
     title: "Minutes from your care",
-    body: "Guest Houses 1 to 3 are a short walk from the centre in Gudu. The Apo road and Guzape houses are a short drive, with a shuttle to appointments.",
+    body: "Our Gudu houses are an affordable short walk from the centre. Our luxury houses on the Apo road and in Guzape are a short drive, with a shuttle to appointments.",
   },
   {
     title: "A reception in every house",
@@ -56,7 +56,7 @@ export const FAQS = [
   },
   {
     q: "Can a family member stay with the patient?",
-    a: "Yes. Every room takes two guests, and you can add an extra carer bed when you book.",
+    a: "Yes. Every room takes two guests and you can add an extra carer bed. For a whole family, Guest House 2 has a two-bedroom VVIP apartment with its own kitchen.",
   },
   {
     q: "How do I pay?",

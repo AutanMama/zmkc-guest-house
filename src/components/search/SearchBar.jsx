@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CalendarDays, HeartPulse, Search, Users } from "lucide-react";
-import { STAY_REASONS } from "../../data/content";
+import { OTHER_GUEST_MAX_NIGHTS, STAY_REASONS } from "../../data/content";
 import { addDays, nightsBetween, todayKey } from "../../lib/dates";
 import { longStayFor } from "../../lib/pricing";
 import { searchQuery } from "../../hooks/useStaySearch";
@@ -72,6 +72,12 @@ export default function SearchBar({ initial, onSearch, onDark = false, narrow = 
           <span className="ml-2">· Stay past a month and every night after is 10% off</span>
         )}
       </p>
+      {form.reason === "other" && (
+        <p className={`mt-1 text-[15px] ${onDark ? "text-white/85" : "text-muted"}`}>
+          Our houses are for patients and their families first. Other guests are welcome for up to {OTHER_GUEST_MAX_NIGHTS} nights when rooms are free.
+          {nights > OTHER_GUEST_MAX_NIGHTS && <span className={`ml-1 font-bold ${onDark ? "text-lime" : "text-alert"}`}>Please shorten your stay to {OTHER_GUEST_MAX_NIGHTS} nights.</span>}
+        </p>
+      )}
     </form>
   );
 }

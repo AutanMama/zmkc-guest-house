@@ -1,4 +1,8 @@
-// Why people stay, and what we suggest for each kind of visit.
+// Why people stay, and what we suggest for each kind of visit. The houses are
+// for patients, their relatives and caregivers first; other guests are welcome
+// when rooms are free, for a limited stay.
+export const OTHER_GUEST_MAX_NIGHTS = 14;
+
 export const STAY_REASONS = [
   {
     id: "dialysis",
@@ -20,9 +24,15 @@ export const STAY_REASONS = [
   },
   {
     id: "visiting",
-    label: "Visiting a patient",
-    note: "Stay near a relative who is admitted, with the centre a short walk away.",
-    suggest: "As long as you need",
+    label: "Family member or caregiver",
+    note: "Stay near a relative who is being treated or admitted, with the centre close by.",
+    suggest: "As long as they need you",
+  },
+  {
+    id: "other",
+    label: "Not here for the centre",
+    note: "We welcome other guests when rooms are free. Our houses are kept for patients and their families first, so these stays are limited to two weeks.",
+    suggest: "Up to 2 weeks",
   },
 ];
 
@@ -42,6 +52,10 @@ export const PROMISES = [
 ];
 
 export const FAQS = [
+  {
+    q: "Can I stay if I'm not a patient?",
+    a: "Our guest houses are for patients of the Zenith Medical & Kidney Centre and their families and caregivers first. When rooms are free we welcome other guests too, for up to two weeks, so there's always a room for a patient who needs one.",
+  },
   {
     q: "How far are the guest houses from the centre?",
     a: "Guest Houses 1, 2 and 3 in Gudu are a four to six minute walk. Guest House 4 on the Apo road is about eight minutes by car, and Guest Houses 5, 6 and 7 in Guzape about fifteen, with a shuttle to your appointments.",

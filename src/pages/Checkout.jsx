@@ -6,7 +6,7 @@ import PaymentChoice from "../components/booking/PaymentChoice";
 import QuoteLines from "../components/booking/QuoteLines";
 import { Field, Input, Select, Textarea } from "../components/ui/Field";
 import TravelBadge from "../components/ui/TravelBadge";
-import { STAY_REASONS } from "../data/content";
+import { OTHER_GUEST_MAX_NIGHTS, STAY_REASONS } from "../data/content";
 import { houseById, unitById } from "../data/houses";
 import { CATEGORIES } from "../data/rooms";
 import { isUnitAvailable } from "../lib/availability";
@@ -48,8 +48,14 @@ export default function Checkout() {
   const q = quote({ rate: room.rate, nights: search.nights, addOns });
   const set = (k) => (e) => setGuest((g) => ({ ...g, [k]: e.target.value }));
 
+  const overLimit = reason === "other" && search.nights > OTHER_GUEST_MAX_NIGHTS;
+
   function confirm(e) {
     e.preventDefault();
+    if (overLimit) {
+      setError(`Guests who aren't here for the centre can stay up to ${OTHER_GUEST_MAX_NIGHTS} nights, so rooms stay free for patients. Please shorten your stay.`);
+      return;
+    }
     if (!isUnitAvailable(room.id, search.checkIn, search.checkOut, bookings)) {
       setError(`${room.name} has just been booked for these dates. Please go back and choose another room.`);
       return;
@@ -98,6 +104,11 @@ export default function Checkout() {
                 <Select value={reason} onChange={(e) => setReason(e.target.value)}>
                   {STAY_REASONS.map((r) => <option key={r.id} value={r.id}>{r.label}</option>)}
                 </Select>
+                {reason === "other" && (
+                  <span className={`mt-1.5 block text-sm ${overLimit ? "font-semibold text-alert" : "text-muted"}`}>
+                    Our houses are for patients and their families first; other guests can stay up to {OTHER_GUEST_MAX_NIGHTS} nights.
+                  </span>
+                )}
               </Field>
               <Field label="Patient's name" hint="Leave blank if it's you."><Input value={guest.patient} onChange={set("patient")} /></Field>
               <Field label="Hospital number (optional)" hint="Helps us line up shuttle times with appointments."><Input value={guest.hospitalNo} onChange={set("hospitalNo")} /></Field>

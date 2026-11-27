@@ -2,12 +2,12 @@ import { units } from "../data/houses";
 import { addDays, todayKey } from "./dates";
 import { quote } from "./pricing";
 
-const KEY = "zenith.bookings.v7";
+const KEY = "zenith.bookings.v8";
 const listeners = new Set();
 
 const FIRST = ["Aisha", "Emeka", "Funke", "Musa", "Ngozi", "Tunde", "Halima", "Chidi", "Bola", "Ibrahim", "Kemi", "Yusuf"];
 const LAST = ["Bello", "Okafor", "Adeyemi", "Danjuma", "Eze", "Lawal", "Okon", "Sani", "Abubakar", "Nwosu"];
-const REASONS = ["dialysis", "transplant", "checkup", "visiting"];
+const REASONS = ["dialysis", "dialysis", "transplant", "checkup", "visiting", "visiting", "other"];
 
 // A believable month of bookings so availability and the front desk aren't empty.
 function seed() {
@@ -19,7 +19,7 @@ function seed() {
     let day = -Math.floor(rand() * 10);
     while (day < 40) {
       const reason = REASONS[Math.floor(rand() * REASONS.length)];
-      const nights = reason === "transplant" ? 21 + Math.floor(rand() * 20) : reason === "dialysis" ? 7 + Math.floor(rand() * 14) : 1 + Math.floor(rand() * 4);
+      const nights = reason === "transplant" ? 21 + Math.floor(rand() * 20) : reason === "dialysis" ? 7 + Math.floor(rand() * 14) : reason === "other" ? 1 + Math.floor(rand() * 10) : 1 + Math.floor(rand() * 4);
       if (rand() < 0.72) {
         const checkIn = addDays(today, day);
         const checkOut = addDays(checkIn, nights);

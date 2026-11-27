@@ -15,7 +15,7 @@ export default function Hero() {
             Care is next door.
           </h1>
           <p className="mt-6 max-w-xl text-lg text-white/90 md:text-xl">
-            Seven guest houses in Gudu, Guzape and on the Apo road, each with its own reception. For patients and the families who come with them.
+            Seven guest houses in Gudu, Guzape and on the Apo road, made for patients of the Zenith Medical & Kidney Centre and the families and caregivers who come with them.
           </p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }} className="mt-10">

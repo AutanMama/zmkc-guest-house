@@ -6,7 +6,7 @@ import { searchQuery } from "../../hooks/useStaySearch";
 import Button from "../ui/Button";
 import SectionTitle from "../ui/SectionTitle";
 
-const NIGHTS = { dialysis: 21, transplant: 42, checkup: 2, visiting: 5 };
+const NIGHTS = { dialysis: 21, transplant: 42, checkup: 2, visiting: 5, other: 3 };
 
 export default function PlanYourStay() {
   const [active, setActive] = useState(STAY_REASONS[0].id);

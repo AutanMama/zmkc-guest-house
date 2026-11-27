@@ -10,7 +10,7 @@ export default function HouseGrid() {
         {Object.values(AREAS).map((area) => (
           <div key={area.id} className="mt-14">
             <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-line pb-3">
-              <h3 className="font-serif text-3xl text-ink">{area.name}</h3>
+              <h3 className="font-display text-3xl text-ink">{area.name}</h3>
               <p className="text-muted">{area.note}</p>
             </div>
             <div className="mt-8 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">

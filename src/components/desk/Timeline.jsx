@@ -17,7 +17,7 @@ export default function Timeline({ bookings, start, days = 14, house = "all", on
         <div className="sticky top-0 z-10 flex border-b border-line bg-paper">
           <div className="w-[200px] shrink-0 px-4 py-3 text-sm font-semibold text-muted">Room</div>
           {cols.map((d, i) => (
-            <div key={d} style={{ width: COL }} className={`shrink-0 py-2 text-center text-xs ${i === 0 ? "font-bold text-garden" : "text-muted"}`}>
+            <div key={d} style={{ width: COL }} className={`shrink-0 py-2 text-center text-xs ${i === 0 ? "font-bold text-hibiscus" : "text-muted"}`}>
               {formatWeekday(d)}
               <span className="block text-sm font-semibold text-ink">{Number(d.slice(8))}</span>
             </div>
@@ -41,7 +41,7 @@ export default function Timeline({ bookings, start, days = 14, house = "all", on
                     </div>
                     <div className="relative flex-1">
                       {cols.map((d, i) => (
-                        <span key={d} style={{ left: i * COL, width: COL }} className={`absolute inset-y-0 border-l border-line/60 ${i === 0 ? "bg-sage-soft/60" : ""}`} aria-hidden />
+                        <span key={d} style={{ left: i * COL, width: COL }} className={`absolute inset-y-0 border-l border-line/60 ${i === 0 ? "bg-blush-soft/60" : ""}`} aria-hidden />
                       ))}
                       {stays.map((b) => {
                         const from = Math.max(0, nightsBetween(start, b.checkIn));

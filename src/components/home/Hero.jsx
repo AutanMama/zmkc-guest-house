@@ -3,32 +3,24 @@ import SearchBar from "../search/SearchBar";
 
 export default function Hero() {
   return (
-    <section className="relative">
-      <div className="mx-auto grid max-w-6xl gap-10 px-5 pt-10 md:px-8 md:pt-16 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-14">
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}>
-          <p className="eyebrow text-brass">Beside the Zenith Medical & Kidney Centre, Gudu</p>
-          <h1 className="mt-5 font-serif text-[52px] leading-[1.02] font-medium tracking-tight text-ink md:text-7xl">
-            Stay close to <em className="text-garden">your care.</em>
+    <section className="relative isolate overflow-hidden">
+      <img src="/photos/house-balcony.webp" alt="" className="absolute inset-0 -z-10 h-full w-full object-cover" />
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(42_15_30/0.2)_0%,rgb(42_15_30/0.35)_40%,rgb(94_15_46/0.94)_100%)]" aria-hidden />
+      <div className="mx-auto flex min-h-[calc(100svh-72px)] max-w-6xl flex-col justify-end px-5 pt-24 pb-10 md:px-8 md:pb-14">
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}>
+          <p className="inline-flex rounded-full bg-mango px-3.5 py-1.5 text-sm font-bold text-ink">4 minutes' walk from the Zenith Kidney Centre</p>
+          <h1 className="mt-5 max-w-4xl font-display text-[56px] leading-[0.95] font-semibold tracking-tight text-white sm:text-7xl lg:text-[112px]">
+            Rest easy.
+            <br />
+            Care is next door.
           </h1>
-          <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted md:text-xl">
-            Seven guest houses in Gudu, Guzape and on the Apo road, each with its own reception. For dialysis, transplant work-ups, check-ups and the families who come along.
+          <p className="mt-6 max-w-xl text-lg text-white/90 md:text-xl">
+            Seven guest houses in Gudu, Guzape and on the Apo road, each with its own reception. For patients and the families who come with them.
           </p>
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="relative"
-        >
-          <img src="/photos/house-balcony.webp" alt="A guest house courtyard with a wooden balcony and a tree in the middle" className="aspect-[5/4] w-full rounded-2xl object-cover" />
-          <div className="absolute -bottom-5 left-5 rounded-xl bg-garden-deep px-5 py-4 text-white shadow-card">
-            <p className="font-serif text-3xl leading-none">4 min</p>
-            <p className="mt-1 text-sm text-sage">walk from Guest House 1 to the centre</p>
-          </div>
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }} className="mt-10">
+          <SearchBar onDark />
         </motion.div>
-      </div>
-      <div className="mx-auto mt-14 max-w-6xl px-5 md:px-8">
-        <SearchBar />
       </div>
     </section>
   );

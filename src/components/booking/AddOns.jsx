@@ -6,8 +6,8 @@ export default function AddOns({ value, onChange }) {
     <ul className="space-y-3">
       {Object.values(ADD_ONS).map((a) => (
           <li key={a.id}>
-            <label className={`flex cursor-pointer items-start gap-4 rounded-lg border p-4 transition-colors ${value[a.id] ? "border-garden bg-sage-soft" : "border-line bg-paper hover:border-ink/30"}`}>
-              <input type="checkbox" checked={!!value[a.id]} onChange={(e) => onChange({ ...value, [a.id]: e.target.checked })} className="mt-1 h-4 w-4 accent-garden" />
+            <label className={`flex cursor-pointer items-start gap-4 rounded-lg border p-4 transition-colors ${value[a.id] ? "border-hibiscus bg-blush-soft" : "border-line bg-paper hover:border-ink/30"}`}>
+              <input type="checkbox" checked={!!value[a.id]} onChange={(e) => onChange({ ...value, [a.id]: e.target.checked })} className="mt-1 h-4 w-4 accent-hibiscus" />
               <span className="flex-1">
                 <span className="flex flex-wrap items-baseline justify-between gap-2">
                   <span className="font-semibold text-ink">{a.label}</span>

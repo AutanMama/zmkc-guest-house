@@ -15,7 +15,7 @@ export default function PlanYourStay() {
   const query = searchQuery({ reason: active, checkIn, checkOut: addDays(checkIn, NIGHTS[active]), guests: active === "visiting" ? 1 : 2 });
 
   return (
-    <section id="plan" className="scroll-mt-20 bg-garden-deep py-20 text-white md:py-24">
+    <section id="plan" className="scroll-mt-20 bg-wine py-20 text-white md:py-24">
       <div className="mx-auto grid max-w-6xl gap-12 px-5 md:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
         <div>
           <SectionTitle light eyebrow="Plan your stay" title="Every visit to the centre is different." intro="Tell us why you're coming and we'll suggest how long to stay and which rooms suit you best." />
@@ -31,7 +31,7 @@ export default function PlanYourStay() {
                 aria-selected={active === r.id}
                 onClick={() => setActive(r.id)}
                 className={`rounded-lg border px-4 py-2.5 text-[15px] font-semibold transition-colors ${
-                  active === r.id ? "border-brass-light bg-brass-light text-ink" : "border-white/20 text-sage hover:border-white/50 hover:text-white"
+                  active === r.id ? "border-mango bg-mango text-ink" : "border-white/20 text-blush hover:border-white/50 hover:text-white"
                 }`}
               >
                 {r.label}
@@ -39,10 +39,10 @@ export default function PlanYourStay() {
             ))}
           </div>
           <div key={reason.id} className="animate-rise mt-8 rounded-xl border border-white/15 p-7 md:p-9" role="tabpanel">
-            <p className="eyebrow text-brass-light">We suggest</p>
-            <p className="mt-3 font-serif text-5xl leading-none md:text-6xl">{reason.suggest}</p>
-            <p className="mt-6 text-lg leading-relaxed text-sage">{reason.note}</p>
-            <Button to={`/stays?${query}`} variant="brass" className="mt-8">
+            <p className="eyebrow text-mango">We suggest</p>
+            <p className="mt-3 font-display text-5xl leading-none md:text-6xl">{reason.suggest}</p>
+            <p className="mt-6 text-lg leading-relaxed text-blush">{reason.note}</p>
+            <Button to={`/stays?${query}`} variant="hibiscus" className="mt-8">
               See rooms for this stay <ArrowRight size={18} aria-hidden />
             </Button>
           </div>

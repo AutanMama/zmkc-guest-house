@@ -21,7 +21,7 @@ export default function SiteHeader() {
               key={l.to}
               to={l.to}
               className={({ isActive }) =>
-                `rounded-md px-3 py-2 text-[15px] font-medium transition-colors ${isActive && !l.to.includes("#") ? "text-garden" : "text-muted hover:text-ink"}`
+                `rounded-md px-3 py-2 text-[15px] font-medium transition-colors ${isActive && !l.to.includes("#") ? "text-hibiscus" : "text-muted hover:text-ink"}`
               }
             >
               {l.label}
@@ -29,7 +29,7 @@ export default function SiteHeader() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <Link to="/stays" className="hidden h-11 items-center rounded-lg bg-garden px-5 text-[15px] font-semibold text-white transition-colors hover:bg-garden-hover sm:inline-flex">
+          <Link to="/stays" className="hidden h-11 items-center rounded-lg bg-hibiscus px-5 text-[15px] font-semibold text-white transition-colors hover:bg-hibiscus-hover sm:inline-flex">
             Book a stay
           </Link>
           <button type="button" onClick={() => setOpen((o) => !o)} className="grid h-11 w-11 place-items-center rounded-lg text-ink hover:bg-mist md:hidden" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open}>
@@ -40,11 +40,11 @@ export default function SiteHeader() {
       {open && (
         <nav className="border-t border-line bg-page px-5 pb-5 md:hidden" aria-label="Main">
           {LINKS.map((l) => (
-            <Link key={l.to} to={l.to} onClick={() => setOpen(false)} className="block border-b border-line py-4 font-serif text-xl text-ink">
+            <Link key={l.to} to={l.to} onClick={() => setOpen(false)} className="block border-b border-line py-4 font-display text-xl text-ink">
               {l.label}
             </Link>
           ))}
-          <Link to="/stays" onClick={() => setOpen(false)} className="mt-5 flex h-12 items-center justify-center rounded-lg bg-garden font-semibold text-white">
+          <Link to="/stays" onClick={() => setOpen(false)} className="mt-5 flex h-12 items-center justify-center rounded-lg bg-hibiscus font-semibold text-white">
             Book a stay
           </Link>
         </nav>

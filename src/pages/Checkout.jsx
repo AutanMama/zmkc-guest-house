@@ -20,8 +20,8 @@ import NotFound from "./NotFound";
 function Step({ n, title, children }) {
   return (
     <section className="border-t border-line pt-8">
-      <h2 className="flex items-baseline gap-3 font-serif text-2xl text-ink">
-        <span className="text-brass">{n}</span> {title}
+      <h2 className="flex items-baseline gap-3 font-display text-2xl text-ink">
+        <span className="text-hibiscus">{n}</span> {title}
       </h2>
       <div className="mt-5">{children}</div>
     </section>
@@ -80,7 +80,7 @@ export default function Checkout() {
       <Link to={`/stays/${house.id}?${searchQuery(search)}`} className="inline-flex items-center gap-2 text-[15px] font-medium text-muted hover:text-ink">
         <ArrowLeft size={17} aria-hidden /> Back to {house.name}
       </Link>
-      <h1 className="mt-5 font-serif text-4xl font-medium tracking-tight text-ink md:text-5xl">Book your stay</h1>
+      <h1 className="mt-5 font-display text-4xl font-medium tracking-tight text-ink md:text-5xl">Book your stay</h1>
 
       <form onSubmit={confirm} className="mt-10 grid gap-12 lg:grid-cols-[1fr_380px]">
         <div className="space-y-10">
@@ -118,8 +118,8 @@ export default function Checkout() {
           <div className="overflow-hidden rounded-xl border border-line bg-paper shadow-card">
             <img src={category.image} alt={category.name} className="aspect-[16/9] w-full object-cover" />
             <div className="p-6">
-              <p className="eyebrow text-brass">{house.name} · {room.block}</p>
-              <p className="mt-2 font-serif text-2xl text-ink">{room.name}</p>
+              <p className="eyebrow text-hibiscus">{house.name} · {room.block}</p>
+              <p className="mt-2 font-display text-2xl text-ink">{room.name}</p>
               <p className="text-[15px] text-ink">Room {room.no} · {category.name}</p>
               <div className="mt-1"><TravelBadge travel={house.travel} /></div>
               <p className="mt-4 text-[15px] text-ink">
@@ -128,7 +128,7 @@ export default function Checkout() {
               </p>
               <div className="mt-5"><QuoteLines quote={q} /></div>
               {error && <p role="alert" className="mt-4 rounded-lg bg-stop-soft p-3 text-sm text-stop">{error}</p>}
-              <button type="submit" className="mt-6 h-12 w-full rounded-lg bg-garden text-[15px] font-semibold text-white transition-colors hover:bg-garden-hover">
+              <button type="submit" className="mt-6 h-12 w-full rounded-lg bg-hibiscus text-[15px] font-semibold text-white transition-colors hover:bg-hibiscus-hover">
                 {payment === "card" ? "Confirm and pay" : "Confirm booking"}
               </button>
               <p className="mt-3 flex items-center justify-center gap-1.5 text-sm text-muted"><Lock size={14} aria-hidden /> Free cancellation up to 48 hours before</p>

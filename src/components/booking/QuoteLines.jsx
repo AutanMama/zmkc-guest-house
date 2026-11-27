@@ -12,7 +12,7 @@ export default function QuoteLines({ quote }) {
         <dd className="figure text-ink">{naira(base)}</dd>
       </div>
       {tier && (
-        <div className="flex justify-between gap-4 text-garden">
+        <div className="flex justify-between gap-4 text-hibiscus">
           <dt>
             {tier.label} ({Math.round(tier.off * 100)}% off)
           </dt>
@@ -27,7 +27,7 @@ export default function QuoteLines({ quote }) {
       ))}
       <div className="flex items-baseline justify-between gap-4 border-t border-line pt-3">
         <dt className="font-semibold text-ink">Total</dt>
-        <dd className="figure font-serif text-3xl text-ink">{naira(total)}</dd>
+        <dd className="figure font-display text-3xl text-ink">{naira(total)}</dd>
       </div>
     </dl>
   );

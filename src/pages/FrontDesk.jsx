@@ -24,8 +24,8 @@ export default function FrontDesk() {
     <main className="mx-auto max-w-[1400px] px-5 py-8 md:px-8 md:py-10">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="eyebrow text-brass">{house === "all" ? "Management view · all seven houses" : `Reception · ${houseById[house].name}`}</p>
-          <h1 className="mt-2 font-serif text-4xl font-medium tracking-tight text-ink md:text-5xl">{formatLong(today)}</h1>
+          <p className="eyebrow text-hibiscus">{house === "all" ? "Management view · all seven houses" : `Reception · ${houseById[house].name}`}</p>
+          <h1 className="mt-2 font-display text-4xl font-medium tracking-tight text-ink md:text-5xl">{formatLong(today)}</h1>
         </div>
         <label className="w-full sm:w-64">
           <span className="sr-only">Show house</span>
@@ -46,7 +46,7 @@ export default function FrontDesk() {
       </div>
 
       <div className="mt-10 flex flex-wrap items-end justify-between gap-4">
-        <h2 className="font-serif text-3xl text-ink">Next two weeks</h2>
+        <h2 className="font-display text-3xl text-ink">Next two weeks</h2>
         <ul className="flex flex-wrap gap-4 text-sm text-ink">
           {Object.values(REASON_TONE).map((t) => (
             <li key={t.label} className="flex items-center gap-2"><span className={`h-2.5 w-2.5 rounded-full ${t.dot}`} aria-hidden />{t.label}</li>

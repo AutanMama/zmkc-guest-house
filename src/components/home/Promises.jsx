@@ -6,8 +6,8 @@ export default function Promises() {
       <ol className="grid gap-10 border-t border-line pt-10 md:grid-cols-3">
         {PROMISES.map((p, i) => (
           <li key={p.title}>
-            <span className="font-serif text-2xl text-brass">0{i + 1}</span>
-            <h3 className="mt-3 font-serif text-2xl font-medium text-ink">{p.title}</h3>
+            <span className="font-display text-2xl text-hibiscus">0{i + 1}</span>
+            <h3 className="mt-3 font-display text-2xl font-medium text-ink">{p.title}</h3>
             <p className="mt-2 leading-relaxed text-muted">{p.body}</p>
           </li>
         ))}

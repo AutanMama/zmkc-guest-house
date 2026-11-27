@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
 const VARIANTS = {
-  primary: "bg-garden text-white hover:bg-garden-hover disabled:bg-mist disabled:text-muted",
+  primary: "bg-hibiscus text-white hover:bg-hibiscus-hover disabled:bg-mist disabled:text-muted",
   secondary: "border border-line bg-paper text-ink hover:border-ink/40",
-  brass: "bg-brass-light text-ink hover:bg-brass-light/85",
-  ghost: "text-garden hover:bg-sage-soft",
+  hibiscus: "bg-mango text-ink hover:bg-mango/85",
+  ghost: "text-hibiscus hover:bg-blush-soft",
   danger: "border border-stop/30 text-stop hover:bg-stop-soft",
 };
 

@@ -10,9 +10,9 @@ export default function Faq() {
         <div className="divide-y divide-line border-y border-line">
           {FAQS.map((f, i) => (
             <details key={f.q} open={i === 0} className="group py-5">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-serif text-xl text-ink">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-xl text-ink">
                 {f.q}
-                <Plus size={20} className="shrink-0 text-garden transition-transform group-open:rotate-45" aria-hidden />
+                <Plus size={20} className="shrink-0 text-hibiscus transition-transform group-open:rotate-45" aria-hidden />
               </summary>
               <p className="mt-3 max-w-2xl leading-relaxed text-muted">{f.a}</p>
             </details>

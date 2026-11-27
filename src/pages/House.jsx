@@ -35,8 +35,8 @@ export default function House() {
         <ArrowLeft size={17} aria-hidden /> All guest houses
       </Link>
       <div className="mt-5">
-        <p className="eyebrow text-brass">{AREAS[house.area].name}</p>
-        <h1 className="mt-2 font-serif text-5xl leading-none font-medium tracking-tight text-ink md:text-6xl">{house.name}</h1>
+        <p className="eyebrow text-hibiscus">{AREAS[house.area].name}</p>
+        <h1 className="mt-2 font-display text-5xl leading-none font-medium tracking-tight text-ink md:text-6xl">{house.name}</h1>
         <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1">
           <TravelBadge travel={house.travel} />
           <span className="inline-flex items-center gap-1.5 text-sm text-muted"><MapPin size={15} aria-hidden />{house.address}</span>
@@ -51,14 +51,14 @@ export default function House() {
           <p className="max-w-2xl text-xl leading-relaxed text-ink">{house.tagline}</p>
           <ul className="mt-6 grid gap-x-6 gap-y-2.5 sm:grid-cols-2">
             {house.amenities.map((a) => (
-              <li key={a} className="flex items-center gap-2.5 text-ink"><Check size={17} className="text-garden" aria-hidden /> {AMENITIES[a]}</li>
+              <li key={a} className="flex items-center gap-2.5 text-ink"><Check size={17} className="text-hibiscus" aria-hidden /> {AMENITIES[a]}</li>
             ))}
           </ul>
 
-          <h2 className="mt-14 font-serif text-3xl text-ink">Choose your room</h2>
+          <h2 className="mt-14 font-display text-3xl text-ink">Choose your room</h2>
           <p className="mt-1 text-muted">{formatLong(search.checkIn)} to {formatLong(search.checkOut)}</p>
           <div className="mt-5">
-            <SearchBar key={query} initial={search} onSearch={setSearch} compact narrow />
+            <SearchBar key={query} initial={search} onSearch={setSearch} narrow />
           </div>
           <div className="mt-8">
             <RoomGrid rooms={rooms} selected={room?.id} onSelect={setPicked} />
@@ -68,10 +68,10 @@ export default function House() {
 
         <aside className="lg:sticky lg:top-24 lg:self-start">
           <div className="rounded-xl border border-line bg-paper p-6 shadow-card">
-            <p className="eyebrow text-brass">Your stay</p>
+            <p className="eyebrow text-hibiscus">Your stay</p>
             {room ? (
               <>
-                <p className="mt-2 font-serif text-2xl text-ink">{room.name}</p>
+                <p className="mt-2 font-display text-2xl text-ink">{room.name}</p>
                 <p className="text-[15px] text-ink">Room {room.no} · {CATEGORIES[room.category].name}</p>
                 <p className="mt-1 text-[15px] text-muted">{room.block}, {house.name}</p>
                 <p className="mt-1 text-[15px] text-muted">{formatLong(search.checkIn)} → {formatLong(search.checkOut)}</p>
@@ -79,7 +79,7 @@ export default function House() {
                 <button
                   type="button"
                   onClick={() => navigate(`/book?${query}&house=${house.id}&room=${room.no}`)}
-                  className="mt-6 h-12 w-full rounded-lg bg-garden text-[15px] font-semibold text-white transition-colors hover:bg-garden-hover"
+                  className="mt-6 h-12 w-full rounded-lg bg-hibiscus text-[15px] font-semibold text-white transition-colors hover:bg-hibiscus-hover"
                 >
                   Continue to booking
                 </button>

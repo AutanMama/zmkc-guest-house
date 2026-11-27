@@ -23,7 +23,7 @@ export default function ManageBooking() {
 
   return (
     <main className="mx-auto max-w-3xl px-5 py-10 md:px-8 md:py-16">
-      <h1 className="font-serif text-4xl font-medium tracking-tight text-ink md:text-5xl">Manage your booking</h1>
+      <h1 className="font-display text-4xl font-medium tracking-tight text-ink md:text-5xl">Manage your booking</h1>
       <p className="mt-3 text-lg text-muted">Find your booking with its number and the phone number you booked with.</p>
       <form onSubmit={look} className="mt-8 grid gap-4 rounded-xl border border-line bg-paper p-5 sm:grid-cols-[1fr_1fr_auto] sm:items-end">
         <Field label="Booking number"><Input value={form.ref} onChange={(e) => setForm({ ...form, ref: e.target.value })} placeholder="ZG-4300" required /></Field>
@@ -34,8 +34,8 @@ export default function ManageBooking() {
       {booking && (
         <div className="animate-rise mt-8 rounded-xl border border-line bg-paper p-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <p className="font-serif text-2xl text-ink">{booking.ref}</p>
-            <span className={`rounded-md px-2.5 py-1 text-sm font-semibold ${booking.status === "cancelled" ? "bg-stop-soft text-stop" : "bg-sage-soft text-garden"}`}>
+            <p className="font-display text-2xl text-ink">{booking.ref}</p>
+            <span className={`rounded-md px-2.5 py-1 text-sm font-semibold ${booking.status === "cancelled" ? "bg-stop-soft text-stop" : "bg-blush-soft text-hibiscus"}`}>
               {booking.status === "cancelled" ? "Cancelled" : "Confirmed"}
             </span>
           </div>

@@ -4,7 +4,7 @@ import { REASON_TONE } from "../../lib/reasons";
 export default function TodayList({ title, list, empty, onOpen }) {
   return (
     <section className="rounded-xl border border-line bg-paper">
-      <h2 className="flex items-baseline justify-between border-b border-line px-5 py-4 font-serif text-xl text-ink">
+      <h2 className="flex items-baseline justify-between border-b border-line px-5 py-4 font-display text-xl text-ink">
         {title} <span className="font-sans text-sm text-muted">{list.length}</span>
       </h2>
       {list.length === 0 ? (

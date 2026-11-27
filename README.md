@@ -24,6 +24,6 @@ Bookings are stored in the browser for the demo, seeded with a month of sample s
 
 ## Stack
 
-React 19, Vite, Tailwind CSS 4, React Router, Framer Motion, lucide-react. Newsreader and Hanken Grotesk type. Photos from Unsplash.
+React 19, Vite, Tailwind CSS 4, React Router, Framer Motion, lucide-react. Clash Display and Satoshi type (Fontshare). Photos from Unsplash.
 
 Design decisions are in [BRAND.md](BRAND.md).

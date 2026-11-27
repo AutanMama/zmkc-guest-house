@@ -6,7 +6,7 @@ function Stat({ label, value, note }) {
   return (
     <div className="rounded-xl border border-line bg-paper p-5">
       <p className="eyebrow text-muted">{label}</p>
-      <p className="figure mt-2 font-serif text-4xl leading-none text-ink">{value}</p>
+      <p className="figure mt-2 font-display text-4xl leading-none text-ink">{value}</p>
       {note && <p className="mt-2 text-sm text-muted">{note}</p>}
     </div>
   );

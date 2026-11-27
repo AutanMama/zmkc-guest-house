@@ -13,15 +13,15 @@ export default function RoomGrid({ rooms, selected, onSelect }) {
           <span className="font-semibold">{freeCount} of {rooms.length}</span> rooms free for your dates
         </p>
         <ul className="flex gap-4 text-sm text-muted">
-          <li className="flex items-center gap-2"><span className="h-3 w-3 rounded-sm border border-garden bg-paper" aria-hidden />Free</li>
+          <li className="flex items-center gap-2"><span className="h-3 w-3 rounded-sm border border-hibiscus bg-paper" aria-hidden />Free</li>
           <li className="flex items-center gap-2"><span className="h-3 w-3 rounded-sm bg-mist" aria-hidden />Occupied</li>
-          <li className="flex items-center gap-2"><span className="h-3 w-3 rounded-sm bg-garden" aria-hidden />Your choice</li>
+          <li className="flex items-center gap-2"><span className="h-3 w-3 rounded-sm bg-hibiscus" aria-hidden />Your choice</li>
         </ul>
       </div>
       <div className="mt-5 space-y-6">
         {blocks.map((b) => (
           <div key={b}>
-            <h3 className="eyebrow text-brass">{b}</h3>
+            <h3 className="eyebrow text-hibiscus">{b}</h3>
             <ul className="mt-3 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4">
               {rooms
                 .filter((r) => r.block === b)
@@ -37,14 +37,14 @@ export default function RoomGrid({ rooms, selected, onSelect }) {
                         aria-label={`${r.name}, room ${r.no}, ${naira(r.rate)} a night, ${r.free ? "free" : "occupied"}`}
                         className={`w-full rounded-lg border p-3 text-left transition-colors ${
                           isSel
-                            ? "border-garden bg-garden text-white"
+                            ? "border-hibiscus bg-hibiscus text-white"
                             : r.free
-                              ? "border-garden/40 bg-paper hover:border-garden"
+                              ? "border-hibiscus/40 bg-paper hover:border-hibiscus"
                               : "cursor-not-allowed border-transparent bg-mist text-muted"
                         }`}
                       >
-                        <span className="block font-serif text-xl">{r.name}</span>
-                        <span className={`mt-0.5 block text-sm ${isSel ? "text-sage" : "text-muted"}`}>Room {r.no} · {CATEGORIES[r.category].name}</span>
+                        <span className="block font-display text-xl">{r.name}</span>
+                        <span className={`mt-0.5 block text-sm ${isSel ? "text-blush" : "text-muted"}`}>Room {r.no} · {CATEGORIES[r.category].name}</span>
                         <span className="mt-1 flex items-baseline justify-between gap-2">
                           <span className={`figure font-semibold ${isSel ? "text-white" : r.free ? "text-ink" : "text-muted"}`}>{naira(r.rate)}</span>
                           {!r.free && <span className="text-xs font-semibold tracking-wide uppercase">Occupied</span>}

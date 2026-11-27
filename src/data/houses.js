@@ -158,15 +158,21 @@ export const houses = [
     number: 6,
     name: "Guest House 6",
     area: "guzape",
-    address: "Guzape, Abuja",
+    address: "Guzape, Abuja. Ours are the last two flats past the gate",
     travel: { mode: "drive", minutes: 15 },
-    tagline: "Six spacious rooms in Guzape, with a lounge and garden for families.",
+    tagline: "Ten spacious rooms in Guzape across the last two flats of the building, each flat with its own kitchen.",
     cover: "/photos/room-twin.webp",
     gallery: ["/photos/room-twin.webp", "/photos/lounge.webp", "/photos/kitchen-table.webp", "/photos/bath-shower.webp"],
     sampleRates: true,
     kitchenNote: "A kitchen in every flat",
     amenities: ["power", "wifi", "water", "cleaning", "security", "reception", "shuttle", "parking", "kitchen", "manager", "restaurant"],
-    rooms: build(numbered("Main building", [["executive", 35000], ["executive", 35000], ["executive", 35000], ["luxury", 45000], ["luxury", 45000], ["luxury", 45000]]), { numbered: true }),
+    rooms: build(
+      [
+        ...numbered("Flat 3", [["executive", 35000], ["executive", 35000], ["executive", 35000], ["luxury", 45000], ["luxury", 45000]]),
+        ...numbered("Flat 4", [["executive", 35000], ["executive", 35000], ["executive", 35000], ["luxury", 45000], ["luxury", 45000]]),
+      ],
+      { numbered: true }
+    ),
   },
   {
     id: "gh7",

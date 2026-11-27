@@ -12,7 +12,7 @@ const MOMENTS = [
 // A day at the guest houses, told in four moments.
 export default function DayWithUs() {
   return (
-    <section id="life" className="scroll-mt-20 py-20 md:py-28">
+    <section id="life" className="scroll-mt-20 overflow-x-clip py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <SectionTitle eyebrow="A day with us" title="Life between appointments." intro="What a day looks like when you stay close to your care." />
         <ol className="relative mt-14 space-y-16 md:space-y-24">

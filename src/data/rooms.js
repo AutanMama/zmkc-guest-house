@@ -46,10 +46,10 @@ export const CATEGORIES = {
     name: "VVIP apartment",
     short: "VVIP",
     image: "/photos/room-twin.webp",
-    summary: "A two-bedroom apartment with its own kitchen: room for the whole family on a long stay.",
-    bed: "2 bedrooms, 2 beds",
-    size: "55 m²",
-    features: ["Two bedrooms", "Own kitchen", "Bathroom", "Air conditioning", "Smart TV", "Fridge", "Dining table"],
+    summary: "A very large apartment with two beds, its own kitchen and bathroom: room for the whole family on a long stay.",
+    bed: "2 beds",
+    size: "50 m²",
+    features: ["Very spacious", "Two beds", "Own kitchen", "Own bathroom", "Air conditioning", "Smart TV", "Fridge"],
   },
 };
 

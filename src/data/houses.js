@@ -43,10 +43,10 @@ const gh1Flat = (block, first) => [
   room(block, "Upstairs", "luxury", 20000),
 ].map((r, i) => ({ ...r, name: `Room ${first + i}` }));
 
-// Guest House 2: four flats. Two singles on the ground floor, except Flat 2,
-// where the ground floor holds the reception and the VVIP two-bedroom apartment.
-// Then Deluxe 1, Deluxe 2 and Executive 1, then Deluxe 3 and VIP 1 on top.
-// Names repeat in each flat.
+// Guest House 2: four flats. Flats 1 and 4 have two singles on the ground floor;
+// Flat 2's ground floor is the VVIP apartment alone; Flat 3's holds the reception
+// and one single. Above: Deluxe 1, Deluxe 2 and Executive 1, then Deluxe 3 and
+// VIP 1 on top. Names repeat in each flat.
 const gh2Flat = (block, ground) => [
   ...ground,
   room(block, "First floor", "deluxe", 18000, "Deluxe 1"),
@@ -80,7 +80,7 @@ export const houses = [
     area: "gudu",
     address: "Gudu, Abuja",
     travel: { mode: "walk", minutes: 5 },
-    tagline: "Our biggest house: four flats with singles, deluxe, executive and VIP rooms, plus a two-bedroom VVIP apartment with its own kitchen.",
+    tagline: "Our biggest house: four flats with singles, deluxe, executive and VIP rooms, plus a large VVIP apartment with two beds and its own kitchen.",
     cover: "/photos/house-balcony.webp",
     gallery: ["/photos/house-balcony.webp", "/photos/room-white.webp", "/photos/room-large.webp", "/photos/lounge.webp"],
     amenities: ["power", "wifi", "water", "cleaning", "security", "reception", "parking"],
@@ -88,7 +88,7 @@ export const houses = [
       [
         ...gh2Flat("Flat 1", gh2Singles("Flat 1")),
         ...gh2Flat("Flat 2", [room("Flat 2", "Ground floor", "vvip", 35000, "VVIP")]),
-        ...gh2Flat("Flat 3", gh2Singles("Flat 3")),
+        ...gh2Flat("Flat 3", gh2Singles("Flat 3").slice(0, 1)),
         ...gh2Flat("Flat 4", gh2Singles("Flat 4")),
       ],
       { numbered: false }

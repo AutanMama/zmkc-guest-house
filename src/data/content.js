@@ -56,7 +56,7 @@ export const FAQS = [
   },
   {
     q: "Can a family member stay with the patient?",
-    a: "Yes. Every room takes two guests and you can add an extra carer bed. For a whole family, Guest House 2 has a two-bedroom VVIP apartment with its own kitchen.",
+    a: "Yes. Every room takes two guests and you can add an extra carer bed. For a whole family, Guest House 2 has a large VVIP apartment with two beds and its own kitchen.",
   },
   {
     q: "How do I pay?",

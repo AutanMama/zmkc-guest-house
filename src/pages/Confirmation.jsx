@@ -2,7 +2,8 @@ import { useParams } from "react-router-dom";
 import { CheckCircle2, MessageCircle, Printer } from "lucide-react";
 import BookingDetails from "../components/booking/BookingDetails";
 import Button from "../components/ui/Button";
-import { houseById, travelText } from "../data/houses";
+import { houseById, travelText, unitById } from "../data/houses";
+import { roomLabel } from "../lib/roomLabel";
 import { formatLong } from "../lib/dates";
 import { naira } from "../lib/money";
 import { useBookings } from "../hooks/useBookings";
@@ -14,7 +15,7 @@ export default function Confirmation() {
   if (!booking) return <NotFound />;
   const house = houseById[booking.house];
   const share = encodeURIComponent(
-    `My Zenith booking ${booking.ref}: ${house.name}, ${booking.roomName ?? `Room ${booking.room}`}, ${formatLong(booking.checkIn)} to ${formatLong(booking.checkOut)}.`
+    `My Zenith booking ${booking.ref}: ${house.name}, ${roomLabel(unitById[booking.unit])}, ${formatLong(booking.checkIn)} to ${formatLong(booking.checkOut)}.`
   );
 
   return (

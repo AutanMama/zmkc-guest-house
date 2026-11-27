@@ -8,6 +8,7 @@ import { quote } from "../../lib/pricing";
 import { searchQuery } from "../../hooks/useStaySearch";
 import QuoteLines from "../booking/QuoteLines";
 import PhotoSlider from "./PhotoSlider";
+import { roomDetail } from "../../lib/roomLabel";
 
 // The full room view: big gallery, what's in the room, price for the dates.
 export default function RoomModal({ room, search, onClose }) {
@@ -38,11 +39,11 @@ export default function RoomModal({ room, search, onClose }) {
         <PhotoSlider photos={room.photos} alt={`${room.name}, ${house.name}`} large className="h-64 shrink-0 sm:h-80 lg:h-auto lg:min-h-[560px] lg:w-[58%]" />
         <div className="flex-1 overflow-y-auto p-6 md:p-8">
           <p className="text-xs font-bold tracking-[0.12em] text-brand uppercase">
-            {house.name} · {room.block}
+            {house.name} · {c.name}
           </p>
           <h2 className="mt-2 font-display text-4xl leading-none font-semibold text-ink">{room.name}</h2>
           <p className="mt-2 text-muted">
-            Room {room.no} · {c.name} · {c.bed} · {c.size}
+            {[roomDetail(room), c.bed, c.size].filter(Boolean).join(" · ")}
           </p>
           <p className="mt-4 leading-relaxed text-ink">{c.summary}</p>
           <ul className="mt-5 grid grid-cols-2 gap-x-4 gap-y-2">

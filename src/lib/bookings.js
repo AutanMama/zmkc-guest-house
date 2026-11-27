@@ -2,7 +2,7 @@ import { units } from "../data/houses";
 import { addDays, todayKey } from "./dates";
 import { quote } from "./pricing";
 
-const KEY = "zenith.bookings.v2";
+const KEY = "zenith.bookings.v3";
 const listeners = new Set();
 
 const FIRST = ["Aisha", "Emeka", "Funke", "Musa", "Ngozi", "Tunde", "Halima", "Chidi", "Bola", "Ibrahim", "Kemi", "Yusuf"];

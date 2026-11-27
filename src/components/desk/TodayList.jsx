@@ -1,5 +1,6 @@
 import { houseById, unitById } from "../../data/houses";
 import { REASON_TONE } from "../../lib/reasons";
+import { roomLabel } from "../../lib/roomLabel";
 
 export default function TodayList({ title, list, empty, onOpen }) {
   return (
@@ -18,7 +19,7 @@ export default function TodayList({ title, list, empty, onOpen }) {
                 <span className="min-w-0 flex-1">
                   <span className="block truncate font-semibold text-ink">{b.guest.name}</span>
                   <span className="block text-sm text-muted">
-                    {houseById[b.house].name} · {unitById[b.unit]?.name} · {b.quote.nights} nights
+                    {houseById[b.house].name} · {roomLabel(unitById[b.unit])} · {b.quote.nights} nights
                   </span>
                 </span>
                 <span className="text-sm text-muted">{b.ref}</span>

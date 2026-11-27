@@ -2,6 +2,7 @@ import { CATEGORIES } from "../../data/rooms";
 import { houseById } from "../../data/houses";
 import { naira } from "../../lib/money";
 import PhotoSlider from "./PhotoSlider";
+import { roomDetail } from "../../lib/roomLabel";
 
 // A room with its own photos. Clicking anywhere opens the full room view.
 export default function RoomCard({ room, nights, onOpen, showHouse = false, selected = false }) {
@@ -21,11 +22,11 @@ export default function RoomCard({ room, nights, onOpen, showHouse = false, sele
       <button type="button" onClick={() => onOpen(room)} className="block w-full p-5 text-left">
         <p className="text-xs font-bold tracking-[0.1em] text-brand uppercase">
           {showHouse ? `${house.name} · ` : ""}
-          {room.block}
+          {c.name}
         </p>
         <h3 className="mt-1 font-display text-2xl leading-tight font-semibold text-ink">{room.name}</h3>
         <p className="mt-1 text-[15px] text-muted">
-          Room {room.no} · {c.name} · {c.size}
+          {roomDetail(room, { withSize: true })}
         </p>
         <p className="mt-3 flex items-baseline justify-between gap-2">
           <span className="text-[15px] font-semibold text-ink">

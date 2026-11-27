@@ -13,6 +13,7 @@ import { isUnitFree } from "../lib/availability";
 import { bookingStore } from "../lib/bookings";
 import { formatLong, todayKey } from "../lib/dates";
 import { quote } from "../lib/pricing";
+import { roomDetail } from "../lib/roomLabel";
 import { useBookings } from "../hooks/useBookings";
 import { searchQuery, useStaySearch } from "../hooks/useStaySearch";
 import NotFound from "./NotFound";
@@ -59,7 +60,6 @@ export default function Checkout() {
       unit: room.id,
       house: house.id,
       room: room.no,
-      roomName: room.name,
       category: room.category,
       checkIn: search.checkIn,
       checkOut: search.checkOut,
@@ -118,9 +118,9 @@ export default function Checkout() {
           <div className="overflow-hidden rounded-xl border border-line bg-paper shadow-card">
             <img src={category.image} alt={category.name} className="aspect-[16/9] w-full object-cover" />
             <div className="p-6">
-              <p className="eyebrow text-brand">{house.name} · {room.block}</p>
+              <p className="eyebrow text-brand">{house.name} · {category.name}</p>
               <p className="mt-2 font-display text-2xl text-ink">{room.name}</p>
-              <p className="text-[15px] text-ink">Room {room.no} · {category.name}</p>
+              <p className="text-[15px] text-ink">{roomDetail(room, { withSize: true })}</p>
               <div className="mt-1"><TravelBadge travel={house.travel} /></div>
               <p className="mt-4 text-[15px] text-ink">
                 {formatLong(search.checkIn)} → {formatLong(search.checkOut)}

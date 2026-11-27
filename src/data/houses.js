@@ -1,3 +1,5 @@
+import { roomPhotos } from "./rooms";
+
 // The seven guest houses. Structure, room counts and price points follow the
 // owner's description; exact street addresses and some rates are still to be
 // confirmed and are marked as sample.
@@ -20,30 +22,40 @@ export const AMENITIES = {
   garden: "Garden and seating",
 };
 
-import { CATEGORIES, roomPhotos } from "./rooms";
-
-// Build numbered rooms for a set of blocks, counting up across the whole house.
-// Rooms are named the way reception calls them: Single 1, Single 2, Deluxe 1…
-// unless the house gives each room its own name.
-function rooms(blocks, names) {
-  let no = 0;
-  const seen = {};
-  const all = blocks.flatMap((b) => b.rates.map((rate, i) => ({ block: b.name, category: b.categories[i], rate })));
-  const counts = all.reduce((c, r) => ({ ...c, [r.category]: (c[r.category] ?? 0) + 1 }), {});
-  return all.map((r) => {
-    no += 1;
-    seen[r.category] = (seen[r.category] ?? 0) + 1;
-    const short = CATEGORIES[r.category].short;
-    const name = names?.[no - 1] ?? (counts[r.category] > 1 ? `${short} ${seen[r.category]}` : short);
-    return { no, name, ...r };
+// Rooms are listed the way each house's reception lays them out: by flat or
+// building, then floor. Houses that call rooms by number get "Room 1", "Room 2"…
+// (counted across the whole house); others name rooms within each flat.
+let photoTurn = 0;
+function build(list, { numbered }) {
+  return list.map((r, i) => {
+    const no = i + 1;
+    return { ...r, no, name: r.name ?? `Room ${no}`, numbered, photos: roomPhotos(r.category, photoTurn++) };
   });
 }
+const room = (block, floor, category, rate, name) => ({ block, floor, category, rate, name });
 
-let photoTurn = 0;
-const withPhotos = (list) => list.map((r) => ({ ...r, photos: roomPhotos(r.category, photoTurn++) }));
-const row = (n, category, rate) => ({ categories: Array(n).fill(category), rates: Array(n).fill(rate) });
-const mix = (...parts) => ({ categories: parts.flatMap((p) => p.categories), rates: parts.flatMap((p) => p.rates) });
-const block = (name, ...parts) => ({ name, ...mix(...parts) });
+// Guest House 1: two flats of five rooms. The single room is on the ground floor.
+const gh1Flat = (block, first) => [
+  room(block, "Ground floor", "standard", 12000),
+  room(block, "Upstairs", "executive", 15000),
+  room(block, "Upstairs", "luxury", 18000),
+  room(block, "Upstairs", "executive", 15000),
+  room(block, "Upstairs", "luxury", 18000),
+].map((r, i) => ({ ...r, name: `Room ${first + i}` }));
+
+// Guest House 2: four flats. Singles on the ground floor (Flat 2 has one, the
+// reception takes the other space), then Deluxe 1, Deluxe 2 and Executive 1,
+// then Deluxe 3 and VIP 1 on the top floor. Names repeat in each flat.
+const gh2Flat = (block, singles) => [
+  ...Array.from({ length: singles }, (_, i) => room(block, "Ground floor", "standard", 15000, `Single ${i + 1}`)),
+  room(block, "First floor", "deluxe", 24000, "Deluxe 1"),
+  room(block, "First floor", "deluxe", 24000, "Deluxe 2"),
+  room(block, "First floor", "executive", 30000, "Executive 1"),
+  room(block, "Second floor", "deluxe", 24000, "Deluxe 3"),
+  room(block, "Second floor", "luxury", 35000, "VIP 1"),
+];
+
+const numbered = (block, cats) => cats.map(([category, rate]) => room(block, null, category, rate));
 
 export const houses = [
   {
@@ -53,14 +65,11 @@ export const houses = [
     area: "gudu",
     address: "Gudu, Abuja",
     travel: { mode: "walk", minutes: 4 },
-    tagline: "Our first guest house: ten simple, well-kept rooms in two apartments, a short walk from the centre.",
+    tagline: "Our first guest house: ten rooms in two flats, a single on each ground floor and executive and VIP rooms upstairs.",
     cover: "/photos/house-courtyard.webp",
     gallery: ["/photos/house-courtyard.webp", "/photos/room-window.webp", "/photos/bath-shower.webp", "/photos/kitchen-table.webp"],
     amenities: ["power", "wifi", "water", "cleaning", "security", "reception"],
-    rooms: rooms([
-      block("Apartment 3", row(2, "standard", 12000), row(2, "deluxe", 15000), row(1, "executive", 18000)),
-      block("Apartment 4", row(2, "standard", 12000), row(2, "deluxe", 15000), row(1, "executive", 18000)),
-    ]),
+    rooms: build([...gh1Flat("Apartment 3", 1), ...gh1Flat("Apartment 4", 6)], { numbered: true }),
   },
   {
     id: "gh2",
@@ -69,15 +78,11 @@ export const houses = [
     area: "gudu",
     address: "Gudu, Abuja",
     travel: { mode: "walk", minutes: 5 },
-    tagline: "Our biggest house: four buildings with seven rooms each, from simple rooms to executive.",
+    tagline: "Our biggest house: four flats with singles on the ground floor, deluxe and executive rooms above, and a VIP room at the top.",
     cover: "/photos/house-balcony.webp",
     gallery: ["/photos/house-balcony.webp", "/photos/room-white.webp", "/photos/room-large.webp", "/photos/lounge.webp"],
     amenities: ["power", "wifi", "water", "cleaning", "security", "reception", "parking"],
-    rooms: rooms(
-      ["Building A", "Building B", "Building C", "Building D"].map((b) =>
-        block(b, row(3, "standard", 15000), row(3, "deluxe", 24000), row(1, "executive", 35000))
-      )
-    ),
+    rooms: build([...gh2Flat("Flat 1", 2), ...gh2Flat("Flat 2", 1), ...gh2Flat("Flat 3", 2), ...gh2Flat("Flat 4", 2)], { numbered: false }),
   },
   {
     id: "gh3",
@@ -91,7 +96,7 @@ export const houses = [
     gallery: ["/photos/house-arch.webp", "/photos/room-pillows.webp", "/photos/bath-tub.webp", "/photos/lounge-sun.webp"],
     amenities: ["power", "wifi", "water", "cleaning", "security", "reception"],
     sampleRates: true,
-    rooms: rooms([block("Main building", row(4, "deluxe", 20000), row(2, "executive", 25000))]),
+    rooms: build(numbered("Main building", [["deluxe", 20000], ["deluxe", 20000], ["deluxe", 20000], ["deluxe", 20000], ["executive", 25000], ["executive", 25000]]), { numbered: true }),
   },
   {
     id: "gh4",
@@ -104,7 +109,7 @@ export const houses = [
     cover: "/photos/hero-garden.webp",
     gallery: ["/photos/hero-garden.webp", "/photos/room-large.webp", "/photos/bath-shower.webp", "/photos/lounge.webp"],
     amenities: ["power", "wifi", "water", "cleaning", "security", "reception", "shuttle", "parking"],
-    rooms: rooms([block("Main building", row(3, "executive", 30000), row(2, "luxury", 40000))]),
+    rooms: build(numbered("Main building", [["executive", 30000], ["executive", 30000], ["executive", 30000], ["luxury", 40000], ["luxury", 40000]]), { numbered: true }),
   },
   {
     id: "gh5",
@@ -118,7 +123,7 @@ export const houses = [
     gallery: ["/photos/lounge-sun.webp", "/photos/room-twin-warm.webp", "/photos/bath-tub.webp", "/photos/kitchen.webp"],
     amenities: ["power", "wifi", "water", "cleaning", "security", "reception", "shuttle", "parking", "garden"],
     sampleRates: true,
-    rooms: rooms([block("Main building", row(2, "executive", 35000), row(2, "luxury", 45000))]),
+    rooms: build(numbered("Main building", [["executive", 35000], ["executive", 35000], ["luxury", 45000], ["luxury", 45000]]), { numbered: true }),
   },
   {
     id: "gh6",
@@ -131,7 +136,7 @@ export const houses = [
     cover: "/photos/room-twin.webp",
     gallery: ["/photos/room-twin.webp", "/photos/lounge.webp", "/photos/kitchen-table.webp", "/photos/bath-shower.webp"],
     amenities: ["power", "wifi", "water", "cleaning", "security", "reception", "shuttle", "parking", "kitchen"],
-    rooms: rooms([block("Main building", row(3, "executive", 30000), row(3, "luxury", 40000))]),
+    rooms: build(numbered("Main building", [["deluxe", 30000], ["deluxe", 30000], ["executive", 30000], ["luxury", 40000], ["luxury", 40000], ["luxury", 40000]]), { numbered: true }),
   },
   {
     id: "gh7",
@@ -140,12 +145,11 @@ export const houses = [
     area: "guzape",
     address: "Guzape, Abuja",
     travel: { mode: "drive", minutes: 15 },
-    tagline: "Our most luxurious house: seven suites in Guzape, finished to a high standard.",
+    tagline: "Our most luxurious house: seven named rooms and suites in Guzape, finished to a high standard.",
     cover: "/photos/lounge.webp",
     gallery: ["/photos/lounge.webp", "/photos/room-twin-warm.webp", "/photos/room-large.webp", "/photos/bath-tub.webp"],
     amenities: ["power", "wifi", "water", "cleaning", "security", "reception", "shuttle", "parking", "garden"],
-    // Guest House 7 names every room. These names are placeholders until confirmed.
-    rooms: rooms([block("Main building", row(4, "executive", 40000), row(3, "luxury", 50000))], ["Emerald", "Sapphire", "Gold", "Diamond", "Platinum", "Royalty", "Crown"]),
+    rooms: build([["executive", 40000, "Emerald"], ["executive", 40000, "Sapphire"], ["executive", 40000, "Gold"], ["executive", 40000, "Diamond"], ["luxury", 50000, "Platinum"], ["luxury", 50000, "Royalty"], ["luxury", 50000, "Crown"]].map(([c, r, n]) => room("Main building", null, c, r, n)), { numbered: false }),
   },
 ];
 
@@ -153,7 +157,7 @@ export const houseById = Object.fromEntries(houses.map((h) => [h.id, h]));
 
 // Every bookable room as a unit, e.g. Guest House 1, Room 6.
 export const units = houses.flatMap((h) =>
-  withPhotos(h.rooms).map((r) => ({ id: `${h.id}-${r.no}`, house: h.id, area: h.area, no: r.no, name: r.name, block: r.block, category: r.category, rate: r.rate, photos: r.photos }))
+  h.rooms.map((r) => ({ id: `${h.id}-${r.no}`, house: h.id, area: h.area, ...r }))
 );
 export const unitById = Object.fromEntries(units.map((u) => [u.id, u]));
 

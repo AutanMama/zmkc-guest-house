@@ -4,12 +4,13 @@ import { CATEGORIES } from "../../data/rooms";
 import { formatLong } from "../../lib/dates";
 import { PAYMENT_OPTIONS } from "../../lib/payments";
 import QuoteLines from "./QuoteLines";
+import { roomLabel } from "../../lib/roomLabel";
 
 export default function BookingDetails({ booking }) {
   const house = houseById[booking.house];
   const rows = [
     ["Guest house", house.name],
-    ["Room", `${unitById[booking.unit]?.name} (room ${unitById[booking.unit]?.no}) · ${CATEGORIES[booking.category]?.name} · ${unitById[booking.unit]?.block}`],
+    ["Room", `${roomLabel(unitById[booking.unit])} · ${CATEGORIES[booking.category]?.name}`],
     ["Check-in", `${formatLong(booking.checkIn)}, from 12:00`],
     ["Check-out", `${formatLong(booking.checkOut)}, by 11:00`],
     ["Guests", booking.guests],

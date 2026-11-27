@@ -2,6 +2,7 @@ import { houses, units } from "../../data/houses";
 import { naira } from "../../lib/money";
 import { addDays, formatWeekday, nightsBetween } from "../../lib/dates";
 import { REASON_TONE } from "../../lib/reasons";
+import { roomLabel } from "../../lib/roomLabel";
 
 const COL = 56;
 
@@ -35,8 +36,7 @@ export default function Timeline({ bookings, start, days = 14, house = "all", on
                 return (
                   <div key={u.id} className="relative flex h-11 border-b border-line last:border-b-0">
                     <div className="flex w-[200px] shrink-0 items-center gap-2 px-4 text-sm">
-                      <span className="w-8 shrink-0 text-muted">{u.no}</span>
-                      <span className="truncate font-semibold text-ink">{u.name}</span>
+                      <span className="truncate font-semibold text-ink">{roomLabel(u)}</span>
                       <span className="ml-auto shrink-0 text-xs text-muted">{naira(u.rate)}</span>
                     </div>
                     <div className="relative flex-1">

@@ -73,9 +73,14 @@ export default function House() {
         {blocks.map((b) => (
           <div key={b} className="mt-10">
             <h3 className="border-b border-line pb-3 font-display text-2xl font-semibold text-ink">{b}</h3>
-            <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {shown.filter((r) => r.block === b).map((r) => <RoomCard key={r.id} room={r} nights={search.nights} onOpen={setOpen} />)}
-            </div>
+            {[...new Set(shown.filter((r) => r.block === b).map((r) => r.floor))].map((floor) => (
+              <div key={floor ?? "all"} className="mt-6">
+                {floor && <p className="mb-3 text-sm font-bold tracking-[0.1em] text-brand uppercase">{floor}</p>}
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  {shown.filter((r) => r.block === b && r.floor === floor).map((r) => <RoomCard key={r.id} room={r} nights={search.nights} onOpen={setOpen} />)}
+                </div>
+              </div>
+            ))}
           </div>
         ))}
         {shown.length === 0 && <p className="mt-10 rounded-2xl border border-dashed border-line p-10 text-center text-muted">No rooms match. Try other filters or dates.</p>}

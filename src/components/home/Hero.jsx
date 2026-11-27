@@ -17,7 +17,7 @@ export default function Hero() {
 
   return (
     <section className="px-3 pt-3 md:px-5 md:pt-5">
-      <div className="relative isolate mx-auto max-w-[1440px] overflow-hidden rounded-[28px] bg-deep">
+      <div className="relative isolate mx-auto max-w-[1440px] overflow-hidden rounded-2xl bg-deep">
         <AnimatePresence initial={false}>
           <motion.img
             key={SLIDES[slide]}

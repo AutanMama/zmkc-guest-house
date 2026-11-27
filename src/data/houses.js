@@ -10,7 +10,7 @@ export const AREAS = {
 };
 
 export const AMENITIES = {
-  power: "24-hour power",
+  power: "Light all night, every night",
   wifi: "Fast Wi-Fi",
   water: "Treated water",
   cleaning: "Housekeeping, daily cleaning",

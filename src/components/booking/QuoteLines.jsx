@@ -13,9 +13,7 @@ export default function QuoteLines({ quote }) {
       </div>
       {tier && (
         <div className="flex justify-between gap-4 text-brand">
-          <dt>
-            {tier.label} ({Math.round(tier.off * 100)}% off)
-          </dt>
+          <dt>{tier.label}</dt>
           <dd className="figure">−{naira(discount)}</dd>
         </div>
       )}

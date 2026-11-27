@@ -82,7 +82,7 @@ export default function Stays() {
                         <div>
                           <p className="text-sm text-muted">From {naira(from)} a night</p>
                           <p className="figure font-display text-3xl text-ink">{naira(q.total)}</p>
-                          <p className="text-sm text-muted">for {search.nights} nights{q.tier && <span className="font-semibold text-brand"> · {Math.round(q.tier.off * 100)}% off</span>}</p>
+                          <p className="text-sm text-muted">for {search.nights} nights{q.tier && <span className="font-semibold text-brand"> · 10% off after month one</span>}</p>
                         </div>
                       )}
                       <Link to={`/stays/${house.id}?${query}`} className={`inline-flex h-11 items-center justify-center gap-2 rounded-lg text-[15px] font-semibold transition-colors ${full ? "border border-line text-ink hover:border-ink/40" : "bg-brand text-white hover:bg-brand-hover"}`}>

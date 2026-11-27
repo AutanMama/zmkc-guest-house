@@ -3,7 +3,7 @@ export const STAY_REASONS = [
   {
     id: "dialysis",
     label: "Dialysis",
-    note: "Sessions two or three times a week. Weekly and monthly rates bring the cost down.",
+    note: "Sessions two or three times a week. Stay past a month and every night after is 10% off.",
     suggest: "2 to 4 weeks",
   },
   {
@@ -37,7 +37,7 @@ export const PROMISES = [
   },
   {
     title: "Built for long stays",
-    body: "Weekly and monthly rates bring the cost down for dialysis and transplant stays, and every house keeps power on around the clock.",
+    body: "Stay past a month and every night after is 10% off. And you'll never sleep without light: if the grid goes off at night, the generator runs until morning.",
   },
 ];
 
@@ -52,7 +52,7 @@ export const FAQS = [
   },
   {
     q: "Do you offer discounts for long stays?",
-    a: "Stays of 7 nights or more are 10% off, and 28 nights or more are 20% off. The discount is applied automatically.",
+    a: "Yes, for stays longer than a month: after your first month, every further night is 10% off. It's applied automatically when you book a long stay, and reception applies it when you renew.",
   },
   {
     q: "Can a family member stay with the patient?",
@@ -63,12 +63,16 @@ export const FAQS = [
     a: "12 noon. Your night runs until 12 noon the next day, whatever time you checked in, even late at night. We allow an extra hour until 1pm; after that a late check-out charge applies unless you renew.",
   },
   {
+    q: "Is there light all the time?",
+    a: "During the day we run on grid power. If it goes off at night, the generator runs until morning, so you'll never sleep without light.",
+  },
+  {
     q: "Can I cook, or order food?",
     a: "Every guest house has a kitchen where you can cook your own meals; reception will show you around. In our Guzape houses there's also a cook: tell them what you'd like and they'll make it for you.",
   },
   {
     q: "How do I pay?",
-    a: "By card or bank transfer when you book, or at the reception of your guest house on arrival. Your room is held for 24 hours if you choose to pay on arrival.",
+    a: "By card or bank transfer when you book, or at reception by POS or transfer when you arrive. Cash isn't accepted at any of our houses. If you pay at reception, we hold your room for 24 hours.",
   },
 ];
 
@@ -76,6 +80,7 @@ export const STAY_RULES = [
   { title: "Check in any time", body: "Day or night, reception is open. Your night runs until 12 noon the next day, whatever time you arrive." },
   { title: "Check out by 12 noon", body: "We allow one extra hour, until 1pm. After that, a late check-out charge applies, or you can renew for another night." },
   { title: "Look after the house", body: "Anything broken or damaged in your room, bathroom or the kitchen is charged at cost." },
+  { title: "No cash, please", body: "Pay by transfer or POS. Cash isn't accepted at any of our houses." },
 ];
 
 export const CONTACT = {

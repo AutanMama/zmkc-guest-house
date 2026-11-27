@@ -67,9 +67,9 @@ export default function SearchBar({ initial, onSearch, onDark = false, narrow = 
       <p className={`mt-3 text-[15px] ${onDark ? "text-white/85" : "text-muted"}`} aria-live="polite">
         {nights} {nights === 1 ? "night" : "nights"}
         {tier ? (
-          <span className={`ml-2 font-bold ${onDark ? "text-lime" : "text-brand"}`}>· {tier.label}: {Math.round(tier.off * 100)}% off</span>
+          <span className={`ml-2 font-bold ${onDark ? "text-lime" : "text-brand"}`}>· {tier.label}</span>
         ) : (
-          <span className="ml-2">· Stay 7 nights or more for 10% off</span>
+          <span className="ml-2">· Stay past a month and every night after is 10% off</span>
         )}
       </p>
     </form>

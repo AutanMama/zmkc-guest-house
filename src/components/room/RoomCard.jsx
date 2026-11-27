@@ -34,7 +34,7 @@ export default function RoomCard({ room, nights, onOpen, showHouse = false, sele
           </span>
           <span className="text-sm font-bold text-brand group-hover:underline">{room.available ? "View and book" : "View room"}</span>
         </p>
-        {room.available && nights >= 7 && <p className="mt-1 text-sm font-semibold text-brand">Long-stay rate applies for {nights} nights</p>}
+        {room.available && nights > 30 && <p className="mt-1 text-sm font-semibold text-brand">10% off every night after your first month</p>}
       </button>
     </article>
   );

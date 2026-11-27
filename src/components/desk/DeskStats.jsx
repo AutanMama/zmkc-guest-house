@@ -16,15 +16,15 @@ export default function DeskStats({ bookings, house, today, tomorrow }) {
   const rooms = house === "all" ? units.length : units.filter((u) => u.house === house).length;
   const active = bookings.filter((b) => b.status !== "cancelled");
   const inHouse = active.filter((b) => overlaps(today, tomorrow, b.checkIn, b.checkOut));
-  const longStays = inHouse.filter((b) => b.quote.nights >= 7).length;
+  const longStays = inHouse.filter((b) => b.quote.nights > 30).length;
   const avg = inHouse.length ? Math.round(inHouse.reduce((n, b) => n + b.quote.nights, 0) / inHouse.length) : 0;
   const nightly = inHouse.reduce((n, b) => n + b.quote.total / b.quote.nights, 0);
   return (
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
       <Stat label="Occupancy tonight" value={`${Math.round((inHouse.length / rooms) * 100)}%`} note={`${inHouse.length} of ${rooms} rooms occupied`} />
-      <Stat label="Long stays" value={longStays} note="Guests staying 7 nights or more" />
+      <Stat label="Monthly guests" value={longStays} note="Staying longer than a month" />
       <Stat label="Average stay" value={`${avg} nights`} note="Across guests in house" />
-      <Stat label="Room revenue tonight" value={naira(nightly)} note="After long-stay discounts" />
+      <Stat label="Room revenue tonight" value={naira(nightly)} note="After monthly discounts" />
     </div>
   );
 }

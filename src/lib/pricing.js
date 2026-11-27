@@ -1,8 +1,7 @@
-// Long stays get cheaper, because most guests are here for treatment, not a weekend.
-export const LONG_STAY = [
-  { nights: 28, off: 0.2, label: "Monthly rate" },
-  { nights: 7, off: 0.1, label: "Weekly rate" },
-];
+// After a month, every further night is 10% off: the first 30 nights are full
+// price, the rest of a long stay is discounted. There's no weekly discount.
+export const MONTH = 30;
+export const MONTHLY_OFF = 0.1;
 
 export const ADD_ONS = {
   carerBed: { id: "carerBed", label: "Extra carer bed", price: 5000, per: "night", note: "A folding bed for a second companion." },
@@ -11,13 +10,15 @@ export const ADD_ONS = {
 };
 
 export function longStayFor(nights) {
-  return LONG_STAY.find((t) => nights >= t.nights) ?? null;
+  if (nights <= MONTH) return null;
+  const discounted = nights - MONTH;
+  return { off: MONTHLY_OFF, nights: discounted, label: `10% off ${discounted} ${discounted === 1 ? "night" : "nights"} after the first month` };
 }
 
 export function quote({ rate, nights, addOns = {} }) {
   const base = rate * nights;
   const tier = longStayFor(nights);
-  const discount = tier ? Math.round(base * tier.off) : 0;
+  const discount = tier ? Math.round(rate * tier.nights * tier.off) : 0;
   const extras = Object.entries(addOns)
     .filter(([, on]) => on)
     .map(([id]) => {

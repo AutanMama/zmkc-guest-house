@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { AREAS, houses } from "../../data/houses";
+import { AREAS, houses, travelText } from "../../data/houses";
 import SectionTitle from "../ui/SectionTitle";
 
 // A schematic of where the houses sit relative to the centre, not a street map.
@@ -15,16 +15,13 @@ export default function AreaMap() {
     <section className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 md:px-8 md:py-24 lg:grid-cols-[1fr_1fr]">
       <div>
         <SectionTitle eyebrow="Where we are" title="Close to the centre, wherever you stay." intro="Three houses in Gudu are a short walk away. The Apo road and Guzape houses are a short drive, with a shuttle to your appointments." />
-        <ul className="mt-8 space-y-4">
-          {Object.values(AREAS).map((a) => (
-            <li key={a.id}>
-              <p className="font-display text-xl text-ink">{a.name}</p>
-              <p className="text-muted">
-                {houses.filter((h) => h.area === a.id).map((h) => (
-                  <Link key={h.id} to={`/stays/${h.id}`} className="mr-3 inline-block font-semibold text-brand hover:underline">GH{h.number}</Link>
-                ))}
-                · {a.note}
-              </p>
+        <ul className="mt-8 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+          {houses.map((h) => (
+            <li key={h.id}>
+              <Link to={`/stays/${h.id}`} className="group flex items-baseline justify-between gap-3 border-b border-line py-2 text-[15px]">
+                <span className="font-semibold text-ink group-hover:text-brand">{h.name}</span>
+                <span className="text-muted">{AREAS[h.area].name} · {travelText(h.travel).replace(" to the centre", "")}</span>
+              </Link>
             </li>
           ))}
         </ul>

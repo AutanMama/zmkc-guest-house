@@ -55,7 +55,7 @@ export default function Hero() {
             ))}
           </h1>
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.55 }} className="mt-5 max-w-lg text-lg text-white/90">
-            Seven guest houses in Gudu, Guzape and on the Apo road, made for patients of the Zenith Medical & Kidney Centre and the families and caregivers who come with them.
+            Quiet, clean rooms a few minutes from the Zenith Medical & Kidney Centre, made for patients and the families and caregivers who come with them.
           </motion.p>
         </div>
 

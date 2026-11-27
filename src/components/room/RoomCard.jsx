@@ -1,6 +1,7 @@
 import { CATEGORIES } from "../../data/rooms";
 import { houseById } from "../../data/houses";
 import { naira } from "../../lib/money";
+import { quote } from "../../lib/pricing";
 import PhotoSlider from "./PhotoSlider";
 import { roomDetail } from "../../lib/roomLabel";
 
@@ -17,7 +18,7 @@ export default function RoomCard({ room, nights, onOpen, showHouse = false, sele
         <span className={`absolute top-3 left-3 rounded-full px-3 py-1 text-xs font-bold ${room.available ? "bg-paper/95 text-brand" : "bg-ink/85 text-white"}`}>
           {room.available ? "Available" : "Occupied"}
         </span>
-        <span className="absolute top-3 right-3 rounded-full bg-lime px-3 py-1 text-sm font-bold text-ink">{naira(room.rate)}</span>
+        <span className="absolute top-3 right-3 rounded-full bg-lime px-3 py-1 text-sm font-bold text-ink">{naira(room.rate)} / night</span>
       </div>
       <button type="button" onClick={() => onOpen(room)} className="block w-full p-5 text-left">
         <p className="text-xs font-bold tracking-[0.1em] text-brand uppercase">
@@ -30,7 +31,7 @@ export default function RoomCard({ room, nights, onOpen, showHouse = false, sele
         </p>
         <p className="mt-3 flex items-baseline justify-between gap-2">
           <span className="text-[15px] font-semibold text-ink">
-            {naira(room.rate)} <span className="font-normal text-muted">a night</span>
+            {naira(quote({ rate: room.rate, nights }).total)} <span className="font-normal text-muted">for {nights} {nights === 1 ? "night" : "nights"}</span>
           </span>
           <span className="text-sm font-bold text-brand group-hover:underline">{room.available ? "View and book" : "View room"}</span>
         </p>

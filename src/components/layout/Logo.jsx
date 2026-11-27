@@ -9,7 +9,7 @@ export default function Logo({ light = false }) {
       </span>
       <span className="leading-tight">
         <span className={`block font-display text-xl font-semibold tracking-tight ${light ? "text-white" : "text-ink"}`}>Zenith Guest Houses</span>
-        <span className={`block text-xs font-bold tracking-[0.14em] uppercase ${light ? "text-lime" : "text-brand"}`}>by ZMKC · Abuja</span>
+        <span className={`block text-xs font-bold tracking-[0.14em] uppercase ${light ? "text-lime" : "text-brand"}`}>Gudu · Apo · Guzape</span>
       </span>
     </Link>
   );

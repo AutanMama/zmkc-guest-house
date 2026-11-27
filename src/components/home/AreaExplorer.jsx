@@ -25,7 +25,7 @@ export default function AreaExplorer() {
     <section id="houses" className="scroll-mt-20 bg-paper py-20 md:py-24">
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
-          <SectionTitle eyebrow="Where would you like to stay?" title="Three neighbourhoods, one standard of care." />
+          <SectionTitle eyebrow="Choose your area" title="Walk to the centre, or stay somewhere quieter." />
           <div className="flex rounded-full bg-page p-1.5" role="tablist" aria-label="Areas">
             {ORDER.map((id) => (
               <button
@@ -51,7 +51,7 @@ export default function AreaExplorer() {
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {areaHouses.map((h, i) => (
               <motion.div key={h.id} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}>
-                <HouseCard house={h} />
+                <HouseCard house={h} showArea={false} />
               </motion.div>
             ))}
           </div>

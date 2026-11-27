@@ -3,7 +3,7 @@ import { Sparkle } from "lucide-react";
 const ITEMS = [
   "Reception open day and night",
   "Never sleep without light",
-  "4 minutes' walk from the centre",
+  "Kept for patients and their families",
   "A cook in every Guzape house",
   "Housekeepers in every house",
   "10% off every night after your first month",

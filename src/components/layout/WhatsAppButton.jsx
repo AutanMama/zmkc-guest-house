@@ -1,8 +1,12 @@
 import { MessageCircle } from "lucide-react";
+import { useLocation } from "react-router-dom";
 import { CONTACT } from "../../data/content";
 
-// Someone is always there to talk to.
+// Someone is always there to talk to. Hidden while booking, so it never
+// covers the booking summary.
 export default function WhatsAppButton() {
+  const { pathname } = useLocation();
+  if (pathname.startsWith("/book")) return null;
   return (
     <a
       href={`https://wa.me/${CONTACT.whatsapp}`}

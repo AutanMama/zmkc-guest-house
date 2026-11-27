@@ -15,6 +15,9 @@ import { useBookings } from "../hooks/useBookings";
 import { searchQuery, useStaySearch } from "../hooks/useStaySearch";
 import NotFound from "./NotFound";
 
+// Shown as cards under the description, so not repeated in the tick list.
+const COVERED_BY_CARDS = ["power", "reception", "manager", "cleaning", "kitchen", "restaurant"];
+
 export default function House() {
   const { id } = useParams();
   const house = houseById[id];
@@ -57,7 +60,7 @@ export default function House() {
       <div className="mt-10 grid gap-8 lg:grid-cols-[1.2fr_1fr]">
         <p className="text-xl leading-relaxed text-ink">{house.tagline}</p>
         <ul className="grid grid-cols-2 gap-x-6 gap-y-2.5">
-          {house.amenities.map((a) => (
+          {house.amenities.filter((a) => !COVERED_BY_CARDS.includes(a)).map((a) => (
             <li key={a} className="flex items-center gap-2.5 text-ink"><Check size={17} className="text-brand" aria-hidden /> {AMENITIES[a]}</li>
           ))}
         </ul>

@@ -13,7 +13,7 @@ export default function StayRules({ house }) {
     ...(house.amenities.includes("restaurant") ? [{ title: "Or let the cook do it", body: "Tell the cook what you'd like and it's made for you, so you can rest.", icon: ChefHat }] : []),
   ];
   return (
-    <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {items.map(({ title, body, icon: Icon }) => (
         <li key={title} className="rounded-2xl bg-paper p-5 shadow-card">
           <Icon size={22} className="text-brand" aria-hidden />

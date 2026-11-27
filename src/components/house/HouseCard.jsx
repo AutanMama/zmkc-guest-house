@@ -4,13 +4,13 @@ import { AREAS, priceRange } from "../../data/houses";
 import { naira } from "../../lib/money";
 import TravelBadge from "../ui/TravelBadge";
 
-export default function HouseCard({ house, query = "" }) {
+export default function HouseCard({ house, query = "", showArea = true }) {
   const [low] = priceRange(house);
   return (
     <Link to={`/stays/${house.id}${query ? `?${query}` : ""}`} className="group block overflow-hidden rounded-2xl bg-paper shadow-card transition-transform duration-300 hover:-translate-y-1">
       <div className="relative aspect-[4/3] overflow-hidden">
         <img src={house.cover} alt={house.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
-        <span className="absolute top-3 left-3 rounded-full bg-paper/95 px-3 py-1 text-xs font-bold tracking-[0.06em] text-brand uppercase">{AREAS[house.area].name}</span>
+        {showArea && <span className="absolute top-3 left-3 rounded-full bg-paper/95 px-3 py-1 text-xs font-bold tracking-[0.06em] text-brand uppercase">{AREAS[house.area].name}</span>}
         <span className="absolute right-3 bottom-3 rounded-full bg-lime px-3.5 py-1.5 text-sm font-bold text-ink">from {naira(low)}</span>
       </div>
       <div className="p-5">

@@ -35,7 +35,7 @@ export default function ManageBooking() {
         <div className="animate-rise mt-8 rounded-xl border border-line bg-paper p-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <p className="font-display text-2xl text-ink">{booking.ref}</p>
-            <span className={`rounded-md px-2.5 py-1 text-sm font-semibold ${booking.status === "cancelled" ? "bg-stop-soft text-stop" : "bg-blush-soft text-hibiscus"}`}>
+            <span className={`rounded-md px-2.5 py-1 text-sm font-semibold ${booking.status === "cancelled" ? "bg-stop-soft text-stop" : "bg-brand-soft text-brand"}`}>
               {booking.status === "cancelled" ? "Cancelled" : "Confirmed"}
             </span>
           </div>

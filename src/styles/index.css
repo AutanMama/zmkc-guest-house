@@ -3,21 +3,21 @@
 
 /* Zenith Guest Houses brand tokens. Components use these names only; see BRAND.md. */
 @theme {
-  --color-page: #fbf4f1;
+  /* ZMKC brand: colours taken from the Zenith Medical & Kidney Centre logo. */
+  --color-page: #f4f8f1;
   --color-paper: #ffffff;
-  --color-mist: #f3e7e3;
-  --color-line: #ebddd9;
-  --color-ink: #2a0f1e;
-  --color-muted: #6b4a5a;
+  --color-mist: #e8efe3;
+  --color-line: #dce5d6;
+  --color-ink: #0f2a1c;
+  --color-muted: #4e6357;
 
-  /* Hibiscus: the zobo flower. Deep red-pink for action, wine for dark bands. */
-  --color-hibiscus: #a3174b;
-  --color-hibiscus-hover: #8a1240;
-  --color-wine: #5e0f2e;
-  --color-blush: #f6d9e2;
-  --color-blush-soft: #fbe7ee;
-  /* Mango: the one warm highlight. */
-  --color-mango: #f6b93b;
+  --color-brand: #00783c;
+  --color-brand-hover: #006631;
+  --color-brand-soft: #e6f3e6;
+  --color-deep: #0b3b26;
+  --color-on-deep: #e3f0c4;
+  --color-lime: #c8dc1e;
+  --color-alert: #d7141b;
 
   --color-ok: #2f7a55;
   --color-warn: #8a5a00;
@@ -28,7 +28,7 @@
   --font-display: "Clash Display", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Satoshi", ui-sans-serif, system-ui, sans-serif;
 
-  --shadow-card: 0 1px 2px rgb(42 15 30 / 0.05), 0 18px 40px -24px rgb(42 15 30 / 0.45);
+  --shadow-card: 0 1px 2px rgb(15 42 28 / 0.05), 0 18px 40px -24px rgb(15 42 28 / 0.45);
 }
 
 @layer base {
@@ -43,7 +43,7 @@
     -webkit-font-smoothing: antialiased;
   }
   :focus-visible {
-    outline: 2px solid var(--color-hibiscus);
+    outline: 2px solid var(--color-brand);
     outline-offset: 2px;
   }
   button:not(:disabled) {

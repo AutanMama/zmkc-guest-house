@@ -10,8 +10,8 @@ const CONTROL = "w-full bg-transparent text-[15px] font-semibold text-ink outlin
 
 function Cell({ icon: Icon, label, children }) {
   return (
-    <label className="flex min-w-0 flex-1 cursor-pointer items-center gap-3 rounded-xl bg-page px-4 py-2.5 transition-colors focus-within:bg-blush-soft hover:bg-blush-soft">
-      <Icon size={20} className="shrink-0 text-hibiscus" aria-hidden />
+    <label className="flex min-w-0 flex-1 cursor-pointer items-center gap-3 rounded-xl bg-page px-4 py-2.5 transition-colors focus-within:bg-brand-soft hover:bg-brand-soft">
+      <Icon size={20} className="shrink-0 text-brand" aria-hidden />
       <span className="min-w-0 flex-1">
         <span className="block text-xs font-bold tracking-[0.08em] text-muted uppercase">{label}</span>
         {children}
@@ -60,14 +60,14 @@ export default function SearchBar({ initial, onSearch, onDark = false, narrow = 
             {[1, 2, 3, 4].map((n) => <option key={n} value={n}>{n} {n === 1 ? "guest" : "guests"}</option>)}
           </select>
         </Cell>
-        <button type="submit" className={`flex items-center justify-center gap-2 rounded-xl bg-hibiscus px-7 py-4 text-base font-bold text-white transition-colors hover:bg-hibiscus-hover sm:col-span-2 ${narrow ? "" : "lg:col-span-1"}`}>
+        <button type="submit" className={`flex items-center justify-center gap-2 rounded-xl bg-brand px-7 py-4 text-base font-bold text-white transition-colors hover:bg-brand-hover sm:col-span-2 ${narrow ? "" : "lg:col-span-1"}`}>
           <Search size={19} aria-hidden /> {onSearch ? "Update" : "Find a room"}
         </button>
       </div>
       <p className={`mt-3 text-[15px] ${onDark ? "text-white/85" : "text-muted"}`} aria-live="polite">
         {nights} {nights === 1 ? "night" : "nights"}
         {tier ? (
-          <span className={`ml-2 font-bold ${onDark ? "text-mango" : "text-hibiscus"}`}>· {tier.label}: {Math.round(tier.off * 100)}% off</span>
+          <span className={`ml-2 font-bold ${onDark ? "text-lime" : "text-brand"}`}>· {tier.label}: {Math.round(tier.off * 100)}% off</span>
         ) : (
           <span className="ml-2">· Stay 7 nights or more for 10% off</span>
         )}

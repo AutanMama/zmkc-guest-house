@@ -20,7 +20,7 @@ export const AMENITIES = {
   garden: "Garden and seating",
 };
 
-import { CATEGORIES } from "./rooms";
+import { CATEGORIES, roomPhotos } from "./rooms";
 
 // Build numbered rooms for a set of blocks, counting up across the whole house.
 // Rooms are named the way reception calls them: Single 1, Single 2, Deluxe 1…
@@ -38,6 +38,9 @@ function rooms(blocks, names) {
     return { no, name, ...r };
   });
 }
+
+let photoTurn = 0;
+const withPhotos = (list) => list.map((r) => ({ ...r, photos: roomPhotos(r.category, photoTurn++) }));
 const row = (n, category, rate) => ({ categories: Array(n).fill(category), rates: Array(n).fill(rate) });
 const mix = (...parts) => ({ categories: parts.flatMap((p) => p.categories), rates: parts.flatMap((p) => p.rates) });
 const block = (name, ...parts) => ({ name, ...mix(...parts) });
@@ -150,7 +153,7 @@ export const houseById = Object.fromEntries(houses.map((h) => [h.id, h]));
 
 // Every bookable room as a unit, e.g. Guest House 1, Room 6.
 export const units = houses.flatMap((h) =>
-  h.rooms.map((r) => ({ id: `${h.id}-${r.no}`, house: h.id, no: r.no, name: r.name, block: r.block, category: r.category, rate: r.rate }))
+  withPhotos(h.rooms).map((r) => ({ id: `${h.id}-${r.no}`, house: h.id, area: h.area, no: r.no, name: r.name, block: r.block, category: r.category, rate: r.rate, photos: r.photos }))
 );
 export const unitById = Object.fromEntries(units.map((u) => [u.id, u]));
 

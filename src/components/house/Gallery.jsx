@@ -13,7 +13,7 @@ export default function Gallery({ images, alt }) {
             onClick={() => setMain(i)}
             aria-label={`Show photo ${i + 1}`}
             aria-pressed={main === i}
-            className={`overflow-hidden rounded-lg ring-offset-2 ring-offset-page transition ${main === i ? "ring-2 ring-hibiscus" : "opacity-80 hover:opacity-100"}`}
+            className={`overflow-hidden rounded-lg ring-offset-2 ring-offset-page transition ${main === i ? "ring-2 ring-brand" : "opacity-80 hover:opacity-100"}`}
           >
             <img src={src} alt="" className="aspect-[4/3] w-full object-cover md:h-[106px]" />
           </button>

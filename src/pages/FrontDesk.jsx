@@ -24,7 +24,7 @@ export default function FrontDesk() {
     <main className="mx-auto max-w-[1400px] px-5 py-8 md:px-8 md:py-10">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="eyebrow text-hibiscus">{house === "all" ? "Management view · all seven houses" : `Reception · ${houseById[house].name}`}</p>
+          <p className="eyebrow text-brand">{house === "all" ? "Management view · all seven houses" : `Reception · ${houseById[house].name}`}</p>
           <h1 className="mt-2 font-display text-4xl font-medium tracking-tight text-ink md:text-5xl">{formatLong(today)}</h1>
         </div>
         <label className="w-full sm:w-64">

@@ -4,7 +4,7 @@ import { travelText } from "../../data/houses";
 export default function TravelBadge({ travel, light = false }) {
   const Icon = travel.mode === "walk" ? Footprints : Car;
   return (
-    <span className={`inline-flex items-center gap-1.5 text-sm font-semibold ${light ? "text-white" : "text-hibiscus"}`}>
+    <span className={`inline-flex items-center gap-1.5 text-sm font-semibold ${light ? "text-white" : "text-brand"}`}>
       <Icon size={15} aria-hidden /> {travelText(travel)}
     </span>
   );

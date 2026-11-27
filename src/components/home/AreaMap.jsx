@@ -21,7 +21,7 @@ export default function AreaMap() {
               <p className="font-display text-xl text-ink">{a.name}</p>
               <p className="text-muted">
                 {houses.filter((h) => h.area === a.id).map((h) => (
-                  <Link key={h.id} to={`/stays/${h.id}`} className="mr-3 inline-block font-semibold text-hibiscus hover:underline">GH{h.number}</Link>
+                  <Link key={h.id} to={`/stays/${h.id}`} className="mr-3 inline-block font-semibold text-brand hover:underline">GH{h.number}</Link>
                 ))}
                 · {a.note}
               </p>
@@ -32,18 +32,18 @@ export default function AreaMap() {
       <svg viewBox="0 0 460 500" className="w-full max-w-[480px] justify-self-center" role="img" aria-label="Schematic map: Guest Houses 1 to 3 in Gudu next to the centre, Guest House 4 on the Apo road, Guest Houses 5 to 7 in Guzape">
         <path d="M206 200 C 260 240, 320 260, 372 286" fill="none" className="stroke-line" strokeWidth="10" strokeLinecap="round" />
         <path d="M206 200 C 160 260, 110 320, 70 380" fill="none" className="stroke-line" strokeWidth="10" strokeLinecap="round" />
-        <circle cx="206" cy="200" r="90" className="fill-blush-soft" />
-        <circle cx="206" cy="200" r="28" className="fill-hibiscus" />
+        <circle cx="206" cy="200" r="90" className="fill-brand-soft" />
+        <circle cx="206" cy="200" r="28" className="fill-brand" />
         <path d="M198 200h16M206 192v16" stroke="#fff" strokeWidth="4" strokeLinecap="round" />
         <text x="206" y="246" textAnchor="middle" className="fill-ink text-[13px] font-semibold">Zenith Medical &amp; Kidney Centre</text>
         {Object.entries(AREA_LABEL).map(([id, [x, y]]) => (
-          <text key={id} x={x} y={y} textAnchor="middle" className="fill-hibiscus font-display text-[18px]">{AREAS[id].name}</text>
+          <text key={id} x={x} y={y} textAnchor="middle" className="fill-brand font-display text-[18px]">{AREAS[id].name}</text>
         ))}
         {houses.map((h) => {
           const [x, y] = SPOTS[h.id];
           return (
             <g key={h.id}>
-              <circle cx={x} cy={y} r="18" className="fill-paper stroke-hibiscus" strokeWidth="2" />
+              <circle cx={x} cy={y} r="18" className="fill-paper stroke-brand" strokeWidth="2" />
               <text x={x} y={y + 5} textAnchor="middle" className="fill-ink text-[13px] font-bold">{h.number}</text>
             </g>
           );

@@ -1,5 +1,5 @@
 const INPUT =
-  "h-12 w-full rounded-lg border border-line bg-paper px-3.5 text-[15px] text-ink transition-colors placeholder:text-muted/70 focus:border-hibiscus focus:ring-3 focus:ring-hibiscus/15 focus:outline-none";
+  "h-12 w-full rounded-lg border border-line bg-paper px-3.5 text-[15px] text-ink transition-colors placeholder:text-muted/70 focus:border-brand focus:ring-3 focus:ring-brand/15 focus:outline-none";
 
 export function Field({ label, hint, children }) {
   return (

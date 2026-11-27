@@ -1,7 +1,7 @@
 // Colour per reason for staying, used on the front desk timeline.
 export const REASON_TONE = {
-  dialysis: { bar: "bg-hibiscus text-white", dot: "bg-hibiscus", label: "Dialysis" },
-  transplant: { bar: "bg-mango text-ink", dot: "bg-mango", label: "Transplant work-up" },
-  checkup: { bar: "bg-blush text-ink", dot: "bg-blush", label: "Check-up" },
-  visiting: { bar: "bg-wine text-white", dot: "bg-wine", label: "Visiting" },
+  dialysis: { bar: "bg-brand text-white", dot: "bg-brand", label: "Dialysis" },
+  transplant: { bar: "bg-lime text-ink", dot: "bg-lime", label: "Transplant work-up" },
+  checkup: { bar: "bg-on-deep text-ink", dot: "bg-on-deep", label: "Check-up" },
+  visiting: { bar: "bg-deep text-white", dot: "bg-deep", label: "Visiting" },
 };

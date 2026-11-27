@@ -5,6 +5,7 @@ import SiteFooter from "./components/layout/SiteFooter";
 import Home from "./pages/Home";
 import Stays from "./pages/Stays";
 import House from "./pages/House";
+import Area from "./pages/Area";
 import Checkout from "./pages/Checkout";
 import Confirmation from "./pages/Confirmation";
 import ManageBooking from "./pages/ManageBooking";
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/stays" element={<Stays />} />
         <Route path="/stays/:id" element={<House />} />
+        <Route path="/areas/:area" element={<Area />} />
         <Route path="/book" element={<Checkout />} />
         <Route path="/booking/:ref" element={<Confirmation />} />
         <Route path="/manage" element={<ManageBooking />} />

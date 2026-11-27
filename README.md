@@ -7,8 +7,8 @@ A booking site concept for the guest houses that serve patients and families of 
 ## What it does
 
 - **Search** by reason for the visit, dates and guests. Long stays are discounted automatically: 10% from 7 nights, 20% from 28.
-- **Three areas, seven houses:** Gudu (walking distance), the Apo road and Guzape, each house with its own reception.
-- **Pick the exact room:** every room is shown by apartment or building with its name, number, price and whether it's free or occupied for the dates.
+- **Three areas, seven houses:** Gudu (walking distance), the Apo road and Guzape, each house with its own reception. Each area has its own page with every room across its houses, filters and sorting.
+- **See every room:** each room has its own swipeable photos, name, number, price and whether it's free or occupied for the dates. Open a room for a large gallery, its features and the price for your stay.
 - **Book** with guest and patient details, extras (carer bed, renal-friendly meals, airport pickup) and payment by card, transfer or on arrival.
 - **Confirmation** with a booking number, WhatsApp sharing and printing; **manage or cancel** a booking with its number and phone.
 - **Front desk:** a view for each house's receptionist and an all-houses view for management, with tonight's occupancy, arrivals and departures, and a two-week room timeline.

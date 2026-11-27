@@ -19,7 +19,7 @@ const BUDGETS = [
 
 function Chip({ active, onClick, children }) {
   return (
-    <button type="button" aria-pressed={active} onClick={onClick} className={`rounded-lg border px-3.5 py-2 text-sm font-semibold transition-colors ${active ? "border-hibiscus bg-hibiscus text-white" : "border-line bg-paper text-ink hover:border-ink/40"}`}>
+    <button type="button" aria-pressed={active} onClick={onClick} className={`rounded-lg border px-3.5 py-2 text-sm font-semibold transition-colors ${active ? "border-brand bg-brand text-white" : "border-line bg-paper text-ink hover:border-ink/40"}`}>
       {children}
     </button>
   );
@@ -71,7 +71,7 @@ export default function Stays() {
                       <div className="mt-4">
                         <div className="flex justify-between text-sm"><span className="font-semibold text-ink">{free.length} of {total} rooms free</span><span className="text-muted">{total - free.length} occupied</span></div>
                         <div className="mt-1.5 flex h-2 overflow-hidden rounded-full bg-mist" aria-hidden>
-                          <span className="bg-hibiscus" style={{ width: `${(free.length / total) * 100}%` }} />
+                          <span className="bg-brand" style={{ width: `${(free.length / total) * 100}%` }} />
                         </div>
                       </div>
                     </div>
@@ -82,10 +82,10 @@ export default function Stays() {
                         <div>
                           <p className="text-sm text-muted">From {naira(from)} a night</p>
                           <p className="figure font-display text-3xl text-ink">{naira(q.total)}</p>
-                          <p className="text-sm text-muted">for {search.nights} nights{q.tier && <span className="font-semibold text-hibiscus"> · {Math.round(q.tier.off * 100)}% off</span>}</p>
+                          <p className="text-sm text-muted">for {search.nights} nights{q.tier && <span className="font-semibold text-brand"> · {Math.round(q.tier.off * 100)}% off</span>}</p>
                         </div>
                       )}
-                      <Link to={`/stays/${house.id}?${query}`} className={`inline-flex h-11 items-center justify-center gap-2 rounded-lg text-[15px] font-semibold transition-colors ${full ? "border border-line text-ink hover:border-ink/40" : "bg-hibiscus text-white hover:bg-hibiscus-hover"}`}>
+                      <Link to={`/stays/${house.id}?${query}`} className={`inline-flex h-11 items-center justify-center gap-2 rounded-lg text-[15px] font-semibold transition-colors ${full ? "border border-line text-ink hover:border-ink/40" : "bg-brand text-white hover:bg-brand-hover"}`}>
                         {full ? "See the house" : "Choose a room"} <ArrowRight size={16} aria-hidden />
                       </Link>
                     </div>

@@ -1,6 +1,6 @@
 import Hero from "../components/home/Hero";
 import Promises from "../components/home/Promises";
-import HouseGrid from "../components/home/HouseGrid";
+import AreaExplorer from "../components/home/AreaExplorer";
 import PlanYourStay from "../components/home/PlanYourStay";
 import AreaMap from "../components/home/AreaMap";
 import Faq from "../components/home/Faq";
@@ -10,7 +10,7 @@ export default function Home() {
     <main>
       <Hero />
       <Promises />
-      <HouseGrid />
+      <AreaExplorer />
       <PlanYourStay />
       <AreaMap />
       <Faq />

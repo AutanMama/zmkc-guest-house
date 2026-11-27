@@ -1,16 +1,15 @@
 import { useMemo, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, Check, MapPin } from "lucide-react";
 import Gallery from "../components/house/Gallery";
-import RoomGrid from "../components/house/RoomGrid";
-import QuoteLines from "../components/booking/QuoteLines";
+import RoomCard from "../components/room/RoomCard";
+import RoomModal from "../components/room/RoomModal";
+import { Chip } from "../components/room/RoomFilters";
 import TravelBadge from "../components/ui/TravelBadge";
 import SearchBar from "../components/search/SearchBar";
 import { AMENITIES, AREAS, houseById } from "../data/houses";
 import { CATEGORIES } from "../data/rooms";
 import { roomStatus } from "../lib/availability";
-import { formatLong } from "../lib/dates";
-import { quote } from "../lib/pricing";
 import { useBookings } from "../hooks/useBookings";
 import { searchQuery, useStaySearch } from "../hooks/useStaySearch";
 import NotFound from "./NotFound";
@@ -18,81 +17,72 @@ import NotFound from "./NotFound";
 export default function House() {
   const { id } = useParams();
   const house = houseById[id];
-  const navigate = useNavigate();
   const [search, setSearch] = useStaySearch();
   const bookings = useBookings();
   const rooms = useMemo(() => (house ? roomStatus(id, search.checkIn, search.checkOut, bookings) : []), [house, id, search.checkIn, search.checkOut, bookings]);
-  const [picked, setPicked] = useState(null);
+  const [open, setOpen] = useState(null);
+  const [onlyFree, setOnlyFree] = useState(false);
+  const [category, setCategory] = useState("all");
 
   if (!house) return <NotFound />;
-  const room = rooms.find((r) => r.id === picked && r.free) ?? null;
-  const q = room && quote({ rate: room.rate, nights: search.nights });
   const query = searchQuery(search);
+  const categories = [...new Set(house.rooms.map((r) => r.category))];
+  const shown = rooms.filter((r) => (!onlyFree || r.free) && (category === "all" || r.category === category));
+  const blocks = [...new Set(shown.map((r) => r.block))];
+  const free = rooms.filter((r) => r.free).length;
 
   return (
     <main className="mx-auto max-w-6xl px-5 py-8 md:px-8 md:py-12">
-      <Link to={`/stays?${query}`} className="inline-flex items-center gap-2 text-[15px] font-medium text-muted hover:text-ink">
-        <ArrowLeft size={17} aria-hidden /> All guest houses
+      <Link to={`/areas/${house.area}?${query}`} className="inline-flex items-center gap-2 text-[15px] font-semibold text-muted hover:text-ink">
+        <ArrowLeft size={17} aria-hidden /> All of {AREAS[house.area].name}
       </Link>
-      <div className="mt-5">
-        <p className="eyebrow text-hibiscus">{AREAS[house.area].name}</p>
-        <h1 className="mt-2 font-display text-5xl leading-none font-medium tracking-tight text-ink md:text-6xl">{house.name}</h1>
-        <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1">
-          <TravelBadge travel={house.travel} />
-          <span className="inline-flex items-center gap-1.5 text-sm text-muted"><MapPin size={15} aria-hidden />{house.address}</span>
+      <div className="mt-5 flex flex-wrap items-end justify-between gap-6">
+        <div>
+          <p className="text-sm font-bold tracking-[0.12em] text-brand uppercase">{AREAS[house.area].name}</p>
+          <h1 className="mt-2 font-display text-5xl leading-none font-semibold tracking-tight text-ink md:text-7xl">{house.name}</h1>
+          <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1">
+            <TravelBadge travel={house.travel} />
+            <span className="inline-flex items-center gap-1.5 text-sm text-muted"><MapPin size={15} aria-hidden />{house.address}</span>
+          </div>
         </div>
+        <p className="rounded-2xl bg-paper px-5 py-3 text-right shadow-card">
+          <span className="block font-display text-3xl font-semibold text-brand">{free}/{rooms.length}</span>
+          <span className="text-sm text-muted">rooms free for your dates</span>
+        </p>
       </div>
       <div className="mt-8">
         <Gallery images={house.gallery} alt={house.name} />
       </div>
-
-      <div className="mt-12 grid gap-12 lg:grid-cols-[1fr_360px]">
-        <div>
-          <p className="max-w-2xl text-xl leading-relaxed text-ink">{house.tagline}</p>
-          <ul className="mt-6 grid gap-x-6 gap-y-2.5 sm:grid-cols-2">
-            {house.amenities.map((a) => (
-              <li key={a} className="flex items-center gap-2.5 text-ink"><Check size={17} className="text-hibiscus" aria-hidden /> {AMENITIES[a]}</li>
-            ))}
-          </ul>
-
-          <h2 className="mt-14 font-display text-3xl text-ink">Choose your room</h2>
-          <p className="mt-1 text-muted">{formatLong(search.checkIn)} to {formatLong(search.checkOut)}</p>
-          <div className="mt-5">
-            <SearchBar key={query} initial={search} onSearch={setSearch} narrow />
-          </div>
-          <div className="mt-8">
-            <RoomGrid rooms={rooms} selected={room?.id} onSelect={setPicked} />
-          </div>
-          {house.sampleRates && <p className="mt-4 text-sm text-muted">Rates for this house are sample figures.</p>}
-        </div>
-
-        <aside className="lg:sticky lg:top-24 lg:self-start">
-          <div className="rounded-xl border border-line bg-paper p-6 shadow-card">
-            <p className="eyebrow text-hibiscus">Your stay</p>
-            {room ? (
-              <>
-                <p className="mt-2 font-display text-2xl text-ink">{room.name}</p>
-                <p className="text-[15px] text-ink">Room {room.no} · {CATEGORIES[room.category].name}</p>
-                <p className="mt-1 text-[15px] text-muted">{room.block}, {house.name}</p>
-                <p className="mt-1 text-[15px] text-muted">{formatLong(search.checkIn)} → {formatLong(search.checkOut)}</p>
-                <div className="mt-5"><QuoteLines quote={q} /></div>
-                <button
-                  type="button"
-                  onClick={() => navigate(`/book?${query}&house=${house.id}&room=${room.no}`)}
-                  className="mt-6 h-12 w-full rounded-lg bg-hibiscus text-[15px] font-semibold text-white transition-colors hover:bg-hibiscus-hover"
-                >
-                  Continue to booking
-                </button>
-                <p className="mt-3 text-center text-sm text-muted">No charge until you confirm.</p>
-              </>
-            ) : (
-              <p className="mt-3 text-[15px] leading-relaxed text-muted">
-                {rooms.some((r) => r.free) ? "Pick a free room to see the price for your stay." : "Every room here is taken for these dates. Try other dates or another house."}
-              </p>
-            )}
-          </div>
-        </aside>
+      <div className="mt-10 grid gap-8 lg:grid-cols-[1.2fr_1fr]">
+        <p className="text-xl leading-relaxed text-ink">{house.tagline}</p>
+        <ul className="grid grid-cols-2 gap-x-6 gap-y-2.5">
+          {house.amenities.map((a) => (
+            <li key={a} className="flex items-center gap-2.5 text-ink"><Check size={17} className="text-brand" aria-hidden /> {AMENITIES[a]}</li>
+          ))}
+        </ul>
       </div>
+
+      <section className="mt-16" aria-labelledby="rooms">
+        <h2 id="rooms" className="font-display text-4xl font-semibold text-ink">Choose your room</h2>
+        <div className="mt-5"><SearchBar key={query} initial={search} onSearch={setSearch} /></div>
+        <div className="mt-6 flex flex-wrap gap-2">
+          <Chip active={category === "all"} onClick={() => setCategory("all")}>All rooms</Chip>
+          {categories.map((c) => <Chip key={c} active={category === c} onClick={() => setCategory(c)}>{CATEGORIES[c].name}</Chip>)}
+          <Chip active={onlyFree} onClick={() => setOnlyFree((v) => !v)}>Free only</Chip>
+        </div>
+        {blocks.map((b) => (
+          <div key={b} className="mt-10">
+            <h3 className="border-b border-line pb-3 font-display text-2xl font-semibold text-ink">{b}</h3>
+            <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {shown.filter((r) => r.block === b).map((r) => <RoomCard key={r.id} room={r} nights={search.nights} onOpen={setOpen} />)}
+            </div>
+          </div>
+        ))}
+        {shown.length === 0 && <p className="mt-10 rounded-2xl border border-dashed border-line p-10 text-center text-muted">No rooms match. Try other filters or dates.</p>}
+        {house.sampleRates && <p className="mt-6 text-sm text-muted">Rates for this house are sample figures.</p>}
+      </section>
+
+      {open && <RoomModal room={open} search={search} onClose={() => setOpen(null)} />}
     </main>
   );
 }
